@@ -4,11 +4,9 @@ import com.fon.bg.ac.dipl.domain.User;
 import com.fon.bg.ac.dipl.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping(path="/real-estate")
@@ -18,10 +16,11 @@ public class MainController {
 
     @PostMapping(path="/add-user") // Map ONLY POST Requests
     public @ResponseBody String addNewUser (
-            @RequestParam String name,
-            @RequestParam String email) {
+            @RequestBody Map<String, Object> requestBody) {
 
         User u = new User();
+        String name = (String) requestBody.get("name");
+        String email = (String) requestBody.get("email");
         u.setName(name);
         u.setEmail(email);
         userRepository.save(u);
