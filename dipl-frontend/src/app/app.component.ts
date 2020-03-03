@@ -9,6 +9,6 @@ export class AppComponent {
   title: string;
  
   constructor() {
-    this.title = 'Real Estate';
+    this.title = 'SPIS - Agencija za nekretnine';
   }
 }
