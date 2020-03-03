@@ -22,6 +22,23 @@ public class RealEstate {
     private String description;
     private String additionalStuff;
 
+    public RealEstate() {
+    }
+
+    public RealEstate(String name, double price, double squareMeters, String type, String service, String city, String cityPart, String heating, String floor, String description, String additionalStuff) {
+        this.name = name;
+        this.price = price;
+        this.squareMeters = squareMeters;
+        this.type = type;
+        this.service = service;
+        this.city = city;
+        this.cityPart = cityPart;
+        this.heating = heating;
+        this.floor = floor;
+        this.description = description;
+        this.additionalStuff = additionalStuff;
+    }
+
     public Integer getId() {
         return id;
     }
