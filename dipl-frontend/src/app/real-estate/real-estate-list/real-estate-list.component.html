@@ -1,0 +1,36 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Naziv</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Kvadratura</th>
+            <th scope="col">Tip</th>
+            <th scope="col">Vrsta Usluge</th>
+            <th scope="col">Grad</th>
+            <th scope="col">Deo Grada</th>
+            <th scope="col">Grejanje</th>
+            <th scope="col">Sprat</th>
+            <th scope="col">Opis</th>
+            <th scope="col">Dodatne Informacije</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let realEstate of realEstates">
+            <td>{{ realEstate.name }}</td>
+            <td>{{ realEstate.price }}</td>
+            <td>{{ realEstate.squareMeters }}</td>
+            <td>{{ realEstate.type }}</td>
+            <td>{{ realEstate.service }}</td>
+            <td>{{ realEstate.city }}</td>
+            <td>{{ realEstate.cityPart }}</td>
+            <td>{{ realEstate.heating }}</td>
+            <td>{{ realEstate.floor }}</td>
+            <td>{{ realEstate.description }}</td>
+            <td>{{ realEstate.additionalStuff }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
