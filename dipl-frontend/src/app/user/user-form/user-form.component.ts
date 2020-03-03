@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/user';
@@ -8,7 +8,7 @@ import { User } from 'src/app/model/user';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit{
  
   user: User;
  
@@ -17,6 +17,9 @@ export class UserFormComponent {
       private router: Router, 
         private userService: UserService) {
     this.user = new User();
+  }
+
+  ngOnInit(): void {
   }
  
   onSubmit() {
