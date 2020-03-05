@@ -14,7 +14,7 @@ export class RealEstateListComponent implements OnInit {
   constructor(private realEstateService: RealEstateService) { }
 
   ngOnInit() {
-    this.realEstateService.findAll().subscribe(data => {
+    this.realEstateService.findAllRealEstates().subscribe(data => {
       this.realEstates = data;
     });
   }

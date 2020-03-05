@@ -1,3 +1,7 @@
+import { CityPart } from './city-part';
+import { User } from './user';
+import { City } from './city';
+
 export class RealEstate {
     id: string;
     name: string;
@@ -5,10 +9,11 @@ export class RealEstate {
     squareMeters: string;
     type: string;
     service: string;
-    city: string;
-    cityPart: string;
+    city: City;
+    cityPart: CityPart;
     heating: string;
     floor: string;
     description: string;
-    additionalStuff: string;
+    additionalInfo: string;
+    user: User;
 }

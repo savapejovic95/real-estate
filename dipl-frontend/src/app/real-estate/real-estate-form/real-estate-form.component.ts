@@ -19,11 +19,24 @@ export class RealEstateFormComponent implements OnInit {
     this.realEstate = new RealEstate();
   }
 
+  public cities: Array<string> = [];
+  public cityParts: Array<string> = [];
+
   ngOnInit(): void {
+    this.dropdownRefresh();
+  }
+
+  dropdownRefresh() {
+    this.realEstateService.findAllCities().subscribe(data=>{
+      console.log(data);
+      data.forEach(element => {
+        this.cities.push(element["name"])
+      });
+    })
   }
 
   onSubmit() {
-    this.realEstateService.save(this.realEstate).subscribe(result => this.gotoRealEstatesList());
+    this.realEstateService.saveRealEstate(this.realEstate).subscribe(result => this.gotoRealEstatesList());
   }
 
   gotoRealEstatesList() {
