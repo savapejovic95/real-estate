@@ -1,11 +1,9 @@
 package com.fon.bg.ac.dipl.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "real_estate")
 public class RealEstate {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,28 +13,27 @@ public class RealEstate {
     private double squareMeters;
     private String type;
     private String service;
-    private String city;
-    private String cityPart;
+    @ManyToOne
+    private CityPart cityPart;
     private String heating;
     private String floor;
     private String description;
-    private String additionalStuff;
+    private String additionalInfo;
 
     public RealEstate() {
     }
 
-    public RealEstate(String name, double price, double squareMeters, String type, String service, String city, String cityPart, String heating, String floor, String description, String additionalStuff) {
+    public RealEstate(String name, double price, double squareMeters, String type, String service, CityPart cityPart, String heating, String floor, String description, String additionalInfo) {
         this.name = name;
         this.price = price;
         this.squareMeters = squareMeters;
         this.type = type;
         this.service = service;
-        this.city = city;
         this.cityPart = cityPart;
         this.heating = heating;
         this.floor = floor;
         this.description = description;
-        this.additionalStuff = additionalStuff;
+        this.additionalInfo = additionalInfo;
     }
 
     public Integer getId() {
@@ -87,19 +84,11 @@ public class RealEstate {
         this.service = service;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCityPart() {
+    public CityPart getCityPart() {
         return cityPart;
     }
 
-    public void setCityPart(String cityPart) {
+    public void setCityPart(CityPart cityPart) {
         this.cityPart = cityPart;
     }
 
@@ -127,11 +116,11 @@ public class RealEstate {
         this.description = description;
     }
 
-    public String getAdditionalStuff() {
-        return additionalStuff;
+    public String getAdditionalInfo() {
+        return additionalInfo;
     }
 
-    public void setAdditionalStuff(String additionalStuff) {
-        this.additionalStuff = additionalStuff;
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }
