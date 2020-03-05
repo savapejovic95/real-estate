@@ -19,11 +19,13 @@ public class RealEstate {
     private String floor;
     private String description;
     private String additionalInfo;
+    @ManyToOne
+    private User user;
 
     public RealEstate() {
     }
 
-    public RealEstate(String name, double price, double squareMeters, String type, String service, CityPart cityPart, String heating, String floor, String description, String additionalInfo) {
+    public RealEstate(String name, double price, double squareMeters, String type, String service, CityPart cityPart, String heating, String floor, String description, String additionalInfo, User user) {
         this.name = name;
         this.price = price;
         this.squareMeters = squareMeters;
@@ -34,6 +36,7 @@ public class RealEstate {
         this.floor = floor;
         this.description = description;
         this.additionalInfo = additionalInfo;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -122,5 +125,13 @@ public class RealEstate {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -51,8 +51,9 @@ public class MainController {
         String floor = (String) requestBody.get("floor");
         String description = (String) requestBody.get("description");
         String additionalStuff = (String) requestBody.get("additionalStuff");
+        User user = (User)  requestBody.get("user");
 
-        RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalStuff);
+        RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalStuff, user);
         realEstateRepository.save(re);
         return "Saved";
     }
