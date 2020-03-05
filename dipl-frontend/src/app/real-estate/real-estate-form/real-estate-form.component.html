@@ -48,12 +48,12 @@
           </div>
           <div class="form-group">
             <label for="city">Grad*</label>
-            <select type="text" [(ngModel)]="realEstate.city" 
+            <select type="text" [(ngModel)]="city"
               class="form-control"
               id="city"
               name="city"
               placeholder="Izaberite grad"
-              required #city="ngModel">
+              required>
               <option *ngFor="let city of cities" [value]="city">
                 {{city}}
               </option>
@@ -61,12 +61,16 @@
           </div>
           <div class="form-group">
             <label for="cityPart">Deo grada*</label>
-            <input type="text" [(ngModel)]="realEstate.cityPart" 
+            <select type="text" [(ngModel)]="realEstate.cityPart" 
               class="form-control"
               id="cityPart"
               name="cityPart"
               placeholder="Izaberite deo grada"
               required #cityPart="ngModel">
+              <option *ngFor="let cityPart of cityParts" [value]="cityPart">
+                {{cityPart}}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="heating">Grejanje</label>

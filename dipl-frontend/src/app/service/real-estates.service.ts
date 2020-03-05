@@ -33,7 +33,7 @@ export class RealEstateService {
     return this.http.get<City[]>(this.realEstatesUrl + 'cities');
   }
 
-  public findAllCityParts(): Observable<CityPart[]> {
+  public findAllCityParts(city: string): Observable<CityPart[]> {
     return this.http.get<CityPart[]>(this.realEstatesUrl + 'city-parts');
   }
 }

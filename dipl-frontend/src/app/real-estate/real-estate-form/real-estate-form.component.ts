@@ -11,6 +11,7 @@ import { RealEstateService } from 'src/app/service/real-estates.service';
 export class RealEstateFormComponent implements OnInit {
 
   realEstate: RealEstate;
+  city: string;
 
   constructor(
     private router: Router,
@@ -23,14 +24,23 @@ export class RealEstateFormComponent implements OnInit {
   public cityParts: Array<string> = [];
 
   ngOnInit(): void {
-    this.dropdownRefresh();
+    this.citiesDropdownRefresh();
   }
 
-  dropdownRefresh() {
+  citiesDropdownRefresh() {
     this.realEstateService.findAllCities().subscribe(data=>{
       console.log(data);
       data.forEach(element => {
         this.cities.push(element["name"])
+      });
+    })
+  }
+
+  cityPartsDropdownRefresh() {
+    this.realEstateService.findAllCityParts(this.city).subscribe(data=>{
+      console.log(data);
+      data.forEach(element => {
+        this.cityParts.push(element["name"])
       });
     })
   }

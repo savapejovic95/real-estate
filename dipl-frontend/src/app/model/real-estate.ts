@@ -9,7 +9,6 @@ export class RealEstate {
     squareMeters: string;
     type: string;
     service: string;
-    city: City;
     cityPart: CityPart;
     heating: string;
     floor: string;
