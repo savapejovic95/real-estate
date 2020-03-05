@@ -25,6 +25,8 @@ export class RealEstateFormComponent implements OnInit {
 
   public cities: Array<City> = [];
   public cityParts: Array<CityPart> = [];
+  public types: Array<string> = ["Stan", "Kuca", "Soba", "Garaza"];
+  public services: Array<string> = ["Prodaja", "Izdavanje"];
 
   ngOnInit(): void {
     this.citiesDropdownRefresh();

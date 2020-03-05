@@ -30,21 +30,29 @@
           </div>
           <div class="form-group">
             <label for="type">Tip*</label>
-            <input type="text" [(ngModel)]="realEstate.type" 
+            <select type="text" [(ngModel)]="realEstate.type" 
               class="form-control"
               id="type"
               name="type"
               placeholder="Izaberite tip"
               required #type="ngModel">
+              <option *ngFor="let type of types" [value]="type">
+                {{type}}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="service">Vrsta oglasa*</label>
-            <input type="text" [(ngModel)]="realEstate.service" 
+            <select type="text" [(ngModel)]="realEstate.service" 
               class="form-control"
               id="service"
               name="service"
               placeholder="Izaberite vrstu oglasa"
               required #service="ngModel">
+              <option *ngFor="let service of services" [value]="service">
+                {{service}}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="city">Grad*</label>
