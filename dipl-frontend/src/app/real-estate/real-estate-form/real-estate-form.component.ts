@@ -15,6 +15,7 @@ export class RealEstateFormComponent implements OnInit {
   realEstate: RealEstate;
   city: string;
   partsDisabled: boolean;
+  cityPartId: string;
 
   constructor(
     private router: Router,
@@ -45,7 +46,7 @@ export class RealEstateFormComponent implements OnInit {
   onCityChange() {
     this.partsDisabled = false;
     this.cityParts = [];
-    this.realEstateService.findAllCityParts(this.city).subscribe(data=>{
+    this.realEstateService.findCityPartsByCityId(this.city).subscribe(data=>{
       console.log(data);
       data.forEach(element => {
         this.cityParts.push(element)
@@ -54,6 +55,10 @@ export class RealEstateFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.realEstateService.findCityPartById(this.cityPartId).subscribe(data => {
+      console.log(data);
+      this.realEstate.cityPart =  data;
+    });
     this.realEstateService.saveRealEstate(this.realEstate).subscribe(result => this.gotoRealEstatesList());
   }
 

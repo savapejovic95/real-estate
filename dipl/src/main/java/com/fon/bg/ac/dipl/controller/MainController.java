@@ -4,10 +4,10 @@ import com.fon.bg.ac.dipl.domain.City;
 import com.fon.bg.ac.dipl.domain.CityPart;
 import com.fon.bg.ac.dipl.domain.RealEstate;
 import com.fon.bg.ac.dipl.domain.User;
-import com.fon.bg.ac.dipl.repository.CityPartRepository;
 import com.fon.bg.ac.dipl.repository.CityRepository;
 import com.fon.bg.ac.dipl.repository.RealEstateRepository;
-import com.fon.bg.ac.dipl.repository.UserRepository;
+import com.fon.bg.ac.dipl.repository.UserRepository;;
+import com.fon.bg.ac.dipl.service.services.ICityPartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class MainController {
     @Autowired
     private CityRepository cityRepository;
     @Autowired
-    private CityPartRepository cityPartRepository;
+    private ICityPartsService cityPartsService;
 
     @PostMapping(path="/add-user")
     public @ResponseBody String addNewUser (
@@ -76,7 +76,17 @@ public class MainController {
     }
 
     @GetMapping(path="/city-parts")
-    public @ResponseBody Iterable<CityPart> getAllCityParts() {
-        return cityPartRepository.findAll();
+    public @ResponseBody Iterable<CityPart> getAllCityPartsFromCity(
+            @RequestParam(value = "cityId", required = false) String cityId) {
+        if(cityId != null) {
+            return cityPartsService.returnCityPartsByCityId(Integer.parseInt(cityId));
+        } else {
+            return cityPartsService.returnAllCityParts();
+        }
+    }
+    @GetMapping(path="/city-part")
+    public @ResponseBody CityPart getCityPartById(
+            @RequestParam(value = "id", required = true) String id) {
+        return cityPartsService.returnCityPartById(Integer.parseInt(id));
     }
 }

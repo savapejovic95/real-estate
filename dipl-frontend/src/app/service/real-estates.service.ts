@@ -33,7 +33,15 @@ export class RealEstateService {
     return this.http.get<City[]>(this.realEstatesUrl + 'cities');
   }
 
-  public findAllCityParts(city: string): Observable<CityPart[]> {
+  public findAllCityParts(): Observable<CityPart[]> {
     return this.http.get<CityPart[]>(this.realEstatesUrl + 'city-parts');
+  }
+
+  public findCityPartsByCityId(cityId: string): Observable<CityPart[]> {
+    return this.http.get<CityPart[]>(this.realEstatesUrl + 'city-parts?cityId=' + cityId);
+  }
+
+  public findCityPartById(cityPartId: string): Observable<CityPart> {
+    return this.http.get<CityPart>(this.realEstatesUrl + 'city-part?id=' + cityPartId);
   }
 }
