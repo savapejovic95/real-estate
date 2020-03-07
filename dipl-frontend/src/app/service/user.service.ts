@@ -6,21 +6,23 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class UserService {
  
-  private usersUrl: string;
-  private addUserUrl: string;
+  private url: string;
  
   constructor(private http: HttpClient) {
-    this.usersUrl = 'http://localhost:8080/real-estate/users';
-    this.addUserUrl = 'http://localhost:8080/real-estate/add-user';
+    this.url = 'http://localhost:8080/real-estate/';
   }
  
   public findAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
+    return this.http.get<User[]>(this.url + 'users');
+  }
+
+  public findUserById(userId: string): Observable<User> {
+    return this.http.get<User>(this.url + 'user?id=' + userId);
   }
  
   public save(user: User) {
     return this.http.post<User>(
-      this.addUserUrl, user,
+      this.url+'add-user', user,
       {
         headers: new HttpHeaders({
              'Content-Type':  'application/json',

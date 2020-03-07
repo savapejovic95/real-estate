@@ -8,6 +8,7 @@ import com.fon.bg.ac.dipl.repository.CityRepository;
 import com.fon.bg.ac.dipl.repository.RealEstateRepository;
 import com.fon.bg.ac.dipl.repository.UserRepository;;
 import com.fon.bg.ac.dipl.service.services.ICityPartsService;
+import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.Map;
 @RequestMapping(path="/real-estate")
 public class MainController {
     @Autowired
-    private UserRepository userRepository;
+    private IUserService userService;
     @Autowired
     private RealEstateRepository realEstateRepository;
     @Autowired
@@ -35,13 +36,13 @@ public class MainController {
         String email = (String) requestBody.get("email");
         u.setName(name);
         u.setEmail(email);
-        userRepository.save(u);
+        userService.save(u);
         return "Saved";
     }
 
     @GetMapping(path="/users")
     public @ResponseBody Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.returnAllUsers();
     }
 
     @PostMapping(path="/add")
@@ -53,14 +54,16 @@ public class MainController {
         double squareMeters = Double.parseDouble((String) requestBody.get("squareMeters"));;
         String type = (String) requestBody.get("type");
         String service = (String) requestBody.get("service");
-        CityPart cityPart = (CityPart) requestBody.get("cityPart");
+        Map<String, Object> cityPartJson = (Map<String, Object>) requestBody.get("cityPart");
+        CityPart cityPart = cityPartsService.returnCityPartById((int) cityPartJson.get("id"));
         String heating = (String) requestBody.get("heating");
         String floor = (String) requestBody.get("floor");
         String description = (String) requestBody.get("description");
-        String additionalStuff = (String) requestBody.get("additionalStuff");
-        User user = (User)  requestBody.get("user");
+        String additionalInfo = (String) requestBody.get("additionalInfo");
+        Map<String, Object> userJson = (Map<String, Object>) requestBody.get("user");
+        User user = userService.returnUserById((int) userJson.get("id"));
 
-        RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalStuff, user);
+        RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalInfo, user);
         realEstateRepository.save(re);
         return "Saved";
     }
@@ -88,5 +91,11 @@ public class MainController {
     public @ResponseBody CityPart getCityPartById(
             @RequestParam(value = "id", required = true) String id) {
         return cityPartsService.returnCityPartById(Integer.parseInt(id));
+    }
+
+    @GetMapping(path="/user")
+    public @ResponseBody User getUserById(
+            @RequestParam(value = "id", required = true) String id) {
+        return userService.returnUserById(Integer.parseInt(id));
     }
 }
