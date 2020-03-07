@@ -55,6 +55,7 @@ public class MainController {
         String type = (String) requestBody.get("type");
         String service = (String) requestBody.get("service");
         Map<String, Object> cityPartJson = (Map<String, Object>) requestBody.get("cityPart");
+        System.out.println("========= " + cityPartJson + " ---- id = " + (int) cityPartJson.get("id"));
         CityPart cityPart = cityPartsService.returnCityPartById((int) cityPartJson.get("id"));
         String heating = (String) requestBody.get("heating");
         String floor = (String) requestBody.get("floor");
@@ -65,7 +66,7 @@ public class MainController {
 
         RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalInfo, user);
         realEstateRepository.save(re);
-        return "Saved";
+        return "{\"status\":\"Saved\"}";
     }
 
     @GetMapping(path="/all")
