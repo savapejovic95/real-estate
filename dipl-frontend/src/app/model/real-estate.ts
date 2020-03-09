@@ -1,6 +1,5 @@
 import { CityPart } from './city-part';
 import { User } from './user';
-import { City } from './city';
 
 export class RealEstate {
     id: string;
