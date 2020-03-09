@@ -36,7 +36,7 @@ public class MainController {
         u.setName(name);
         u.setEmail(email);
         userService.save(u);
-        return "Saved";
+        return "{\"status\":\"Saved\"}";
     }
 
     @GetMapping(path="/users")
