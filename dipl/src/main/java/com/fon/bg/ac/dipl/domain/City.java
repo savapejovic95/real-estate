@@ -3,15 +3,19 @@ package com.fon.bg.ac.dipl.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "city")
+public class City {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-
     private String name;
 
-    private String email;
+    public City() {
+    }
+
+    public City(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -27,13 +31,5 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

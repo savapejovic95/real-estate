@@ -3,15 +3,22 @@ package com.fon.bg.ac.dipl.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "city_part")
+public class CityPart {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-
     private String name;
+    @ManyToOne
+    private City city;
 
-    private String email;
+    public CityPart() {
+    }
+
+    public CityPart(String name, City city) {
+        this.name = name;
+        this.city = city;
+    }
 
     public Integer getId() {
         return id;
@@ -29,11 +36,7 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public City getCity() { return city; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setCity(City city) { this.city = city; }
 }
