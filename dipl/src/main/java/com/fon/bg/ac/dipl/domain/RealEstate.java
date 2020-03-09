@@ -11,10 +11,12 @@ public class RealEstate {
     private String name;
     private double price;
     private double squareMeters;
+    private double rooms;
     private String type;
     private String service;
     @ManyToOne
     private CityPart cityPart;
+    private String address;
     private String heating;
     private String floor;
     private String description;
@@ -25,13 +27,15 @@ public class RealEstate {
     public RealEstate() {
     }
 
-    public RealEstate(String name, double price, double squareMeters, String type, String service, CityPart cityPart, String heating, String floor, String description, String additionalInfo, User user) {
+    public RealEstate(String name, double price, double squareMeters, double rooms, String type, String service, CityPart cityPart, String address, String heating, String floor, String description, String additionalInfo, User user) {
         this.name = name;
         this.price = price;
         this.squareMeters = squareMeters;
+        this.rooms = rooms;
         this.type = type;
         this.service = service;
         this.cityPart = cityPart;
+        this.address = address;
         this.heating = heating;
         this.floor = floor;
         this.description = description;
@@ -71,6 +75,14 @@ public class RealEstate {
         this.squareMeters = squareMeters;
     }
 
+    public double getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(double rooms) {
+        this.rooms = rooms;
+    }
+
     public String getType() {
         return type;
     }
@@ -93,6 +105,14 @@ public class RealEstate {
 
     public void setCityPart(CityPart cityPart) {
         this.cityPart = cityPart;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getHeating() {

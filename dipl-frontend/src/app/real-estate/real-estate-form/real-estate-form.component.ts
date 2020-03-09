@@ -31,10 +31,14 @@ export class RealEstateFormComponent implements OnInit {
   public cityParts: Array<CityPart> = [];
   public types: Array<string> = ["Stan", "Kuca", "Soba", "Garaza"];
   public services: Array<string> = ["Prodaja", "Izdavanje"];
+  public heatingTypes: Array<string> = ["CG", "EG", "TA", "Gas", "Podno"];
 
   ngOnInit(): void {
     this.citiesDropdownRefresh();
     this.partsDisabled = true;
+    this.userService.findUserById("1").subscribe(data => {
+      this.realEstate.user =  data;
+    });
   }
 
   citiesDropdownRefresh() {
@@ -57,13 +61,13 @@ export class RealEstateFormComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+  onCityPartChange() {
     this.realEstateService.findCityPartById(this.cityPartId).subscribe(data => {
       this.realEstate.cityPart =  data;
     });
-    this.userService.findUserById("1").subscribe(data => {
-      this.realEstate.user =  data;
-    });
+  }
+
+  onSubmit() {
     console.log(this.realEstate);
     this.realEstateService.saveRealEstate(this.realEstate).subscribe(result => this.gotoRealEstatesList());
   }

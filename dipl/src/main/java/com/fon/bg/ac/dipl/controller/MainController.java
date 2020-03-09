@@ -51,11 +51,13 @@ public class MainController {
 
         String name = (String) requestBody.get("name");
         double price = Double.parseDouble((String) requestBody.get("price"));
-        double squareMeters = Double.parseDouble((String) requestBody.get("squareMeters"));;
+        double squareMeters = Double.parseDouble((String) requestBody.get("squareMeters"));
+        double rooms = Double.parseDouble((String) requestBody.get("rooms"));
         String type = (String) requestBody.get("type");
         String service = (String) requestBody.get("service");
         Map<String, Object> cityPartJson = (Map<String, Object>) requestBody.get("cityPart");
         CityPart cityPart = cityPartsService.returnCityPartById((int) cityPartJson.get("id"));
+        String address = (String) requestBody.get("address");
         String heating = (String) requestBody.get("heating");
         String floor = (String) requestBody.get("floor");
         String description = (String) requestBody.get("description");
@@ -63,7 +65,7 @@ public class MainController {
         Map<String, Object> userJson = (Map<String, Object>) requestBody.get("user");
         User user = userService.returnUserById((int) userJson.get("id"));
 
-        RealEstate re = new RealEstate(name, price, squareMeters, type, service, cityPart, heating, floor, description, additionalInfo, user);
+        RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
         realEstateRepository.save(re);
         return "{\"status\":\"Saved\"}";
     }

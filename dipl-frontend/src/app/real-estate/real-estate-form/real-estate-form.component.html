@@ -29,6 +29,15 @@
             required #squareMeters="ngModel">
         </div>
         <div class="form-group">
+          <label for="rooms">Broj Soba*</label>
+          <input type="text" [(ngModel)]="realEstate.rooms" 
+            class="form-control"
+            id="rooms"
+            name="rooms"
+            placeholder="Unesite broj soba"
+            required #rooms="ngModel">
+        </div>
+        <div class="form-group">
           <label for="type">Tip*</label>
           <select type="text" [(ngModel)]="realEstate.type" 
             class="form-control"
@@ -60,7 +69,6 @@
             class="form-control"
             id="city"
             name="city"
-            placeholder="Izaberite grad"
             required>
             <option *ngFor="let city of cities" [value]="city.id">
               {{city.name}}
@@ -69,24 +77,36 @@
         </div>
         <div class="form-group">
           <label for="cityPart">Deo grada*</label>
-          <select type="text" [(ngModel)]="cityPartId" 
+          <select type="text" [(ngModel)]="cityPartId" (change)="onCityPartChange()"
             class="form-control"
             id="cityPart"
             name="cityPart"
-            placeholder="Izaberite deo grada"
-            required [disabled]="partsDisabled" #cityPart="ngModel">
+            required [disabled]="partsDisabled">
             <option *ngFor="let cityPart of cityParts" [value]="cityPart.id">
               {{cityPart.name}}
             </option>
           </select>
         </div>
         <div class="form-group">
+          <label for="address">Adresa*</label>
+          <input type="text" [(ngModel)]="realEstate.address" 
+            class="form-control"
+            id="address"
+            name="address"
+            placeholder="Unesite ulicu i broj">
+        </div>
+        <div class="form-group">
           <label for="heating">Grejanje</label>
-          <input type="text" [(ngModel)]="realEstate.heating" 
+          <select type="text" [(ngModel)]="realEstate.heating" 
             class="form-control"
             id="heating"
             name="heating"
-            placeholder="Izaberite tip grejanja">
+            placeholder="Izaberite tip grejanja"
+            #heating="ngModel">
+            <option *ngFor="let heating of heatingTypes" [value]="heating">
+              {{heating}}
+            </option>
+          </select>
         </div>
         <div class="form-group">
           <label for="floor">Sprat</label>
