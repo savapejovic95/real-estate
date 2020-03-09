@@ -4,10 +4,9 @@ import com.fon.bg.ac.dipl.domain.City;
 import com.fon.bg.ac.dipl.domain.CityPart;
 import com.fon.bg.ac.dipl.domain.RealEstate;
 import com.fon.bg.ac.dipl.domain.User;
-import com.fon.bg.ac.dipl.repository.CityRepository;
-import com.fon.bg.ac.dipl.repository.RealEstateRepository;
-import com.fon.bg.ac.dipl.repository.UserRepository;;
 import com.fon.bg.ac.dipl.service.services.ICityPartsService;
+import com.fon.bg.ac.dipl.service.services.ICityService;
+import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,9 @@ public class MainController {
     @Autowired
     private IUserService userService;
     @Autowired
-    private RealEstateRepository realEstateRepository;
+    private IRealEstateService realEstateService;
     @Autowired
-    private CityRepository cityRepository;
+    private ICityService cityService;
     @Autowired
     private ICityPartsService cityPartsService;
 
@@ -66,18 +65,18 @@ public class MainController {
         User user = userService.returnUserById((int) userJson.get("id"));
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
-        realEstateRepository.save(re);
+        realEstateService.saveRealEstate(re);
         return "{\"status\":\"Saved\"}";
     }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<RealEstate> getAllRealEstates() {
-        return realEstateRepository.findAll();
+        return realEstateService.returnAllRealEstates();
     }
 
     @GetMapping(path="/cities")
     public @ResponseBody Iterable<City> getAllCities() {
-        return cityRepository.findAll();
+        return cityService.returnAllCities();
     }
 
     @GetMapping(path="/city-parts")

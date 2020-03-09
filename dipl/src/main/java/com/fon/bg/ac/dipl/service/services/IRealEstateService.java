@@ -7,5 +7,6 @@ import java.util.List;
 public interface IRealEstateService {
 
     List<RealEstate> returnAllRealEstates();
+
     void saveRealEstate(RealEstate realEstate);
 }
