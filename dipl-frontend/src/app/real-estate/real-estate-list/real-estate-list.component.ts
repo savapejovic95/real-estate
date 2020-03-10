@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 
@@ -9,7 +9,7 @@ import { RealEstateService } from 'src/app/service/real-estates.service';
 })
 export class RealEstateListComponent implements OnInit {
 
-  realEstates: RealEstate[];
+  @Input() realEstates: RealEstate[];
 
   constructor(private realEstateService: RealEstateService) { }
 

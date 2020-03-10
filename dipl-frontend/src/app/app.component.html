@@ -1,119 +1,12 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card bg-dark my-5">
-        <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-        <div class="card-body" id="filtersForm">
-          <form (ngSubmit)="onSubmit()" #realEstateFilterForm="ngForm">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="service">Trazim?*</label>
-                    <select type="text" [(ngModel)]="filter.type"
-                      class="form-control"
-                      id="type"
-                      name="type"
-                      required #type="ngModel">
-                      <option *ngFor="let type of types" [value]="type">
-                        {{type}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="service">Vrsta oglasa:*</label>
-                    <select type="text" [(ngModel)]="filter.service" 
-                      class="form-control"
-                      id="service"
-                      name="service"
-                      placeholder="Izaberite vrstu oglasa"
-                      required #service="ngModel">
-                      <option *ngFor="let service of services" [value]="service">
-                        {{service}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="city">Izaberite grad*</label>
-                    <select type="text" [(ngModel)]="filter.cityId" (change)="onCityChange()"
-                      class="form-control"
-                      id="city"
-                      name="city"
-                      required>
-                      <option *ngFor="let city of cities" [value]="city.id">
-                        {{city.name}}
-                      </option>
-                      </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="cityPart">Izaberite deo grada</label>
-                    <select type="text" [(ngModel)]="filter.cityPartId"
-                      class="form-control"
-                      id="cityPart"
-                      name="cityPart"
-                      [disabled]="partsDisabled">
-                      <option *ngFor="let cityPart of cityParts" [value]="cityPart.id">
-                        {{cityPart.name}}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="price">Cena do:</label>
-                    <input type="text" [(ngModel)]="filter.priceTo" 
-                      class="form-control"
-                      id="price"
-                      name="price"
-                      placeholder="Unesite cenu"
-                      #price="ngModel">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="squareMeters">Kvadratura od:</label>
-                    <input type="text" [(ngModel)]="filter.squareMetersFrom" 
-                      class="form-control"
-                      id="squareMeters"
-                      name="squareMeters"
-                      placeholder="Unesite kvadraturu"
-                      #squareMeters="ngModel">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="rooms">Broj soba od:</label>
-                    <input type="text" [(ngModel)]="filter.roomsFrom" 
-                      class="form-control"
-                      id="rooms"
-                      name="rooms"
-                      placeholder="Unesite broj soba"
-                      #rooms="ngModel">
-                  </div>
-                </div>
-              </div>
-              <button type="submit" [disabled]="!realEstateFilterForm.form.valid"
-                    class="btn btn-info">Trazi</button>
-          </form>
-        </div>
-      </div>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+  <app-filter (filteredRealEstatesEvent)="recieveFilteredRealEstates($event)"></app-filter>
+  <app-real-estate-list [realEstates]="realEstates"></app-real-estate-list>
+  <router-outlet></router-outlet>
   <div class="row">
     <ul class="text-center list-inline py-3">
-      <li class="list-inline-item">
+      <!--<li class="list-inline-item">
         <a routerLink="/all" class="btn btn-info">All Real Estates</a>
-      </li>
+      </li>-->
       <li class="list-inline-item">
         <a routerLink="/add-real-estate" class="btn btn-info">Add Real Estate</a>
       </li>

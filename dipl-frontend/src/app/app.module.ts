@@ -10,6 +10,7 @@ import { UserService } from './service/user.service';
 import { RealEstateService } from './service/real-estates.service';
 import { RealEstateListComponent } from './real-estate/real-estate-list/real-estate-list.component';
 import { RealEstateFormComponent } from './real-estate/real-estate-form/real-estate-form.component';
+import { FilterComponent } from './real-estate/filter/filter.component';
  
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RealEstateFormComponent } from './real-estate/real-estate-form/real-est
     UserListComponent,
     UserFormComponent,
     RealEstateListComponent,
-    RealEstateFormComponent
+    RealEstateFormComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
