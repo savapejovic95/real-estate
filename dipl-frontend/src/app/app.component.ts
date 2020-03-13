@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RealEstate } from './model/real-estate';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string;
+  realEstates: RealEstate[];
+  _router: Router;
  
-  constructor() {
-    this.title = 'SPIS - Agencija za nekretnine';
+  constructor(_router: Router) {
+    this._router = _router;
   }
+
+  ngOnInit(): void {
+  }
+
+  recieveFilteredRealEstates($event){
+    this.realEstates = $event;
+    console.log(this.realEstates);
+  }
+
 }

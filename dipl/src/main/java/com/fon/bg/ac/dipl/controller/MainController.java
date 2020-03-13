@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -88,6 +90,7 @@ public class MainController {
             return cityPartsService.returnAllCityParts();
         }
     }
+
     @GetMapping(path="/city-part")
     public @ResponseBody CityPart getCityPartById(
             @RequestParam(value = "id", required = true) String id) {
@@ -98,5 +101,95 @@ public class MainController {
     public @ResponseBody User getUserById(
             @RequestParam(value = "id", required = true) String id) {
         return userService.returnUserById(Integer.parseInt(id));
+    }
+
+    @GetMapping(path="/filter")
+    public @ResponseBody Iterable<RealEstate> getFilteredRealEstates(
+            @RequestParam(value = "priceFrom", required = false) String priceFrom,
+            @RequestParam(value = "priceTo", required = false) String priceTo,
+            @RequestParam(value = "squareMetersFrom", required = false) String squareMetersFrom,
+            @RequestParam(value = "squareMetersTo", required = false) String squareMetersTo,
+            @RequestParam(value = "roomsFrom", required = false) String roomsFrom,
+            @RequestParam(value = "roomsTo", required = false) String roomsTo,
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value = "service", required = false) String service,
+            @RequestParam(value = "cityPartId", required = false) String cityPartId,
+            @RequestParam(value = "cityId", required = false) String cityId) {
+        List<RealEstate> realEstates = realEstateService.returnAllRealEstates();
+        List<RealEstate> filteredOut = new ArrayList<>();
+        if(priceFrom != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getPrice() < Double.parseDouble(priceFrom)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(priceTo != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getPrice() > Double.parseDouble(priceTo)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(squareMetersFrom != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(squareMetersTo != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(roomsFrom != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getRooms() < Double.parseDouble(roomsFrom)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(roomsTo != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getRooms() > Double.parseDouble(roomsTo)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(type != null){
+            for (RealEstate realEstate : realEstates) {
+                if(!(realEstate.getType().equals(type))){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(service != null){
+            for (RealEstate realEstate : realEstates) {
+                if(!(realEstate.getService().equals(service))){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(cityPartId != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getCityPart().getId() != Integer.parseInt(cityPartId)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+        if(cityId != null){
+            for (RealEstate realEstate : realEstates) {
+                if(realEstate.getCityPart().getCity().getId() != Integer.parseInt(cityId)){
+                    filteredOut.add(realEstate);
+                }
+            }
+        }
+
+        realEstates.removeAll(filteredOut);
+
+        return realEstates;
     }
 }

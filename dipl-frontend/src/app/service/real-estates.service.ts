@@ -4,6 +4,7 @@ import { RealEstate } from '../model/real-estate';
 import { Observable } from 'rxjs/Observable';
 import { City } from '../model/city';
 import { CityPart } from '../model/city-part';
+import { Filter } from '../model/filter';
  
 @Injectable()
 export class RealEstateService {
@@ -43,5 +44,14 @@ export class RealEstateService {
 
   public findCityPartById(cityPartId: string): Observable<CityPart> {
     return this.http.get<CityPart>(this.realEstatesUrl + 'city-part?id=' + cityPartId);
+  }
+
+  public findFilteredRealEstates(filter: Filter): Observable<RealEstate[]> {
+    var url = "?";
+    for(var key in filter){
+      url += key + "=" + filter[key] + "&";
+    }
+    url = url.substring(0, url.length - 1);
+    return this.http.get<RealEstate[]>(this.realEstatesUrl + 'filter' + url);
   }
 }

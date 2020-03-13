@@ -1,0 +1,44 @@
+<mat-toolbar class="app-toolbar">
+  <a routerLink="/" class="menu-item">
+    <button
+      type="button"
+      mat-icon-button>
+      <mat-icon aria-label="Side nav toggle icon">home</mat-icon><span> SPIS</span>
+    </button>
+  </a>
+  <a routerLink="/add-real-estate" class="menu-item">
+    <button
+      type="button"
+      mat-icon-button style="margin-left: 40px;">
+      <mat-icon>add_box</mat-icon><span> Dodaj Nekretninu</span>
+    </button>
+  </a>
+  <a routerLink="/" class="menu-item" style="position: absolute; right: 0px; margin-right: 330px;" *ngIf="loggedIn">
+    <button
+      type="button"
+      mat-icon-button>
+      <mat-icon>store</mat-icon><span> Moje Nekretnine</span>
+    </button>
+  </a>
+  <a routerLink="/" class="menu-item" style="position: absolute; right: 0px; margin-right: 180px;" *ngIf="loggedIn">
+    <button
+      type="button"
+      mat-icon-button>
+      <mat-icon>account_circle</mat-icon><span> Moj Nalog</span>
+    </button>
+  </a>
+  <a routerLink="/" class="menu-item" style="position: absolute; right: 0px; margin-right: 30px;" *ngIf="loggedIn">
+    <button
+      type="button"
+      mat-icon-button style="margin-right: 40px;">
+      <mat-icon>power_settings_new</mat-icon><span> Odjavi se</span>
+    </button>
+  </a>
+  <a routerLink="/" class="menu-item" style="position: absolute; right: 0px; margin-right: 30px;" *ngIf="!loggedIn">
+    <button
+      type="button"
+      mat-icon-button style="margin-right: 40px;">
+      <mat-icon>perm_identity</mat-icon><span> Prijava</span>
+    </button>
+  </a>
+</mat-toolbar>
