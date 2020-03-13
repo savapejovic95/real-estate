@@ -12,6 +12,14 @@ import { RealEstateService } from './service/real-estates.service';
 import { RealEstateListComponent } from './real-estate/real-estate-list/real-estate-list.component';
 import { RealEstateFormComponent } from './real-estate/real-estate-form/real-estate-form.component';
 import { FilterComponent } from './real-estate/filter/filter.component';
+import { TopMenuComponent } from './top-menu/top-menu.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
 @NgModule({
   declarations: [
@@ -20,14 +28,22 @@ import { FilterComponent } from './real-estate/filter/filter.component';
     UserFormComponent,
     RealEstateListComponent,
     RealEstateFormComponent,
-    FilterComponent
+    FilterComponent,
+    TopMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService, RealEstateService],
   bootstrap: [AppComponent]

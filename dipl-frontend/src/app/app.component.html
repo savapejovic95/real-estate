@@ -1,15 +1,10 @@
+<app-top-menu></app-top-menu>
 <div class="container">
-  <app-filter (filteredRealEstatesEvent)="recieveFilteredRealEstates($event)"></app-filter>
-  <app-real-estate-list [realEstates]="realEstates"></app-real-estate-list>
+  <app-filter (filteredRealEstatesEvent)="recieveFilteredRealEstates($event)" *ngIf="_router.url == '/'"></app-filter>
+  <app-real-estate-list [realEstates]="realEstates" *ngIf="_router.url == '/'"></app-real-estate-list>
   <router-outlet></router-outlet>
   <div class="row">
     <ul class="text-center list-inline py-3">
-      <!--<li class="list-inline-item">
-        <a routerLink="/all" class="btn btn-info">All Real Estates</a>
-      </li>-->
-      <li class="list-inline-item">
-        <a routerLink="/add-real-estate" class="btn btn-info">Add Real Estate</a>
-      </li>
       <li class="list-inline-item">
         <a routerLink="/users" class="btn btn-info">List Users</a>
       </li>
