@@ -53,7 +53,7 @@ public class MainController {
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewRealEstate (
+    public @ResponseBody RealEstate addNewRealEstate (
             @RequestBody Map<String, Object> requestBody) {
 
         String name = (String) requestBody.get("name");
@@ -73,8 +73,8 @@ public class MainController {
         User user = userService.returnUserById((int) userJson.get("id"));
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
-        realEstateService.saveRealEstate(re);
-        return "{\"status\":\"Saved\"}";
+        RealEstate saved = realEstateService.saveRealEstate(re);
+        return saved;
     }
 
     @GetMapping(path="/all")
@@ -110,14 +110,14 @@ public class MainController {
     }
     
     @PostMapping(path="/upload-image")
-    public @ResponseBody String uploadImage (
+    public @ResponseBody Image uploadImage (
     		@RequestParam (value = "image", required = true) MultipartFile file,
     		@RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
 
         RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
         Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
-        imageService.saveImage(image);
-        return "{\"status\":\"Saved\"}";
+        Image saved = imageService.saveImage(image);
+        return saved;
     }
 
     @GetMapping(path="/filter")

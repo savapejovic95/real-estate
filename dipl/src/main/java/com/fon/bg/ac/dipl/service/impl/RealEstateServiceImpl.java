@@ -21,8 +21,8 @@ public class RealEstateServiceImpl implements IRealEstateService {
     }
 
     @Override
-    public void saveRealEstate(RealEstate realEstate) {
-        realEstateRepository.save(realEstate);
+    public RealEstate saveRealEstate(RealEstate realEstate) {
+        return realEstateRepository.save(realEstate);
     }
 
 	@Override

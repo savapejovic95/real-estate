@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IImageService {
 	
-	void saveImage(Image image);
+	Image saveImage(Image image);
 
     Image returnImageById(int id);
     
