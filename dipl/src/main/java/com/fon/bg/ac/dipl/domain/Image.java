@@ -8,19 +8,24 @@ public class Image {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private String path;
+    private String name;
+    private String type;
+    @Lob
+    private byte[] pic;
     @ManyToOne
     private RealEstate realEstate;
 
     public Image() {
     }
 
-    public Image(String path, RealEstate realEstate) {
-        this.path = path;
-        this.realEstate = realEstate;
-    }
+    public Image(String name, String type, byte[] pic, RealEstate realEstate) {
+		this.name = name;
+		this.type = type;
+		this.pic = pic;
+		this.realEstate = realEstate;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -28,15 +33,31 @@ public class Image {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
-    }
+    public String getName() {
+		return name;
+	}
 
-    public void setPath(String path) {
-        this.path = path;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public RealEstate getRealEstate() {
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
+	public RealEstate getRealEstate() {
         return realEstate;
     }
 

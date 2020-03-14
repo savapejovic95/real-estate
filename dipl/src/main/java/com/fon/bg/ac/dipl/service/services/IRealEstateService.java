@@ -9,4 +9,6 @@ public interface IRealEstateService {
     List<RealEstate> returnAllRealEstates();
 
     void saveRealEstate(RealEstate realEstate);
+    
+    RealEstate returnRealEstateById(int id);
 }

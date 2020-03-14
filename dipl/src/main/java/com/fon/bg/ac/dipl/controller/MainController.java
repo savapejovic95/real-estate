@@ -2,16 +2,20 @@ package com.fon.bg.ac.dipl.controller;
 
 import com.fon.bg.ac.dipl.domain.City;
 import com.fon.bg.ac.dipl.domain.CityPart;
+import com.fon.bg.ac.dipl.domain.Image;
 import com.fon.bg.ac.dipl.domain.RealEstate;
 import com.fon.bg.ac.dipl.domain.User;
 import com.fon.bg.ac.dipl.service.services.ICityPartsService;
 import com.fon.bg.ac.dipl.service.services.ICityService;
+import com.fon.bg.ac.dipl.service.services.IImageService;
 import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +31,8 @@ public class MainController {
     private ICityService cityService;
     @Autowired
     private ICityPartsService cityPartsService;
+    @Autowired
+    private IImageService imageService;
 
     @PostMapping(path="/add-user")
     public @ResponseBody String addNewUser (
@@ -101,6 +107,17 @@ public class MainController {
     public @ResponseBody User getUserById(
             @RequestParam(value = "id", required = true) String id) {
         return userService.returnUserById(Integer.parseInt(id));
+    }
+    
+    @PostMapping(path="/upload-image")
+    public @ResponseBody String uploadImage (
+    		@RequestParam (value = "image", required = true) MultipartFile file,
+    		@RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
+
+        RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
+        Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
+        imageService.saveImage(image);
+        return "{\"status\":\"Saved\"}";
     }
 
     @GetMapping(path="/filter")
