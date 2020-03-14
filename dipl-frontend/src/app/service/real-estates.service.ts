@@ -27,7 +27,16 @@ export class RealEstateService {
              'Content-Type':  'application/json',
            })
       }
-  )
+    )
+  }
+
+  public saveImage(uploadData: FormData, realEstateId: string) {
+    return this.http.post(
+      this.realEstatesUrl + 'upload-image?realEstateId=' + realEstateId, uploadData)
+  }
+
+  public findImageByRealEstateId(realEstateId: string) {
+    return this.http.get(this.realEstatesUrl + 'image?realEstateId=' + realEstateId);
   }
 
   public findAllCities(): Observable<City[]> {

@@ -5,7 +5,7 @@
         <mat-card-title>{{ realEstate.name }}</mat-card-title>
         <mat-card-subtitle>{{ realEstate.description }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="assets/img/appartment1.jpg" alt="Appartment Image">
+      <img mat-card-image [src]="realEstate.convertedImage" alt="Appartment Image">
       <mat-card-content>
         Cena: {{ realEstate.price }} €<br>
         Kvadratura: {{ realEstate.squareMeters }} m2

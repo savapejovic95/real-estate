@@ -16,6 +16,16 @@ export class RealEstateListComponent implements OnInit {
   ngOnInit() {
     this.realEstateService.findAllRealEstates().subscribe(data => {
       this.realEstates = data;
+      for (var realEstate of this.realEstates) {
+        this.realEstateService.findImageByRealEstateId(realEstate.id).subscribe(res => {
+            console.log(res);
+            var receivedImageData : any;
+            receivedImageData = res;
+            var base64Data = receivedImageData.pic;
+            realEstate.convertedImage = 'data:image/jpeg;base64,' + base64Data; },
+          err => console.log('Error Occured duringng saving: ' + err)
+        );
+      }
     });
   }
 

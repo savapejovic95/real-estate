@@ -74,6 +74,7 @@ public class MainController {
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
         RealEstate saved = realEstateService.saveRealEstate(re);
+        System.out.println(saved.getId() + " = saved.getId()");
         return saved;
     }
 
@@ -118,6 +119,12 @@ public class MainController {
         Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
         Image saved = imageService.saveImage(image);
         return saved;
+    }
+    
+    @GetMapping(path="/image")
+    public @ResponseBody Image getImageByRealEstateId(
+            @RequestParam(value = "realEstateId", required = true) String realEstateId) {
+        return imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId)).get(0);
     }
 
     @GetMapping(path="/filter")

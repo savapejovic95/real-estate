@@ -1,0 +1,14 @@
+<br>
+<h3>Dodajte slike Vaše nekretnine</h3>
+<div>
+    <input type="file" (change)="onFileChanged($event)">
+
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
+</div>
+<br>
+<input type="button" class="btn btn-info" (click)="onUpload()" value="Dodaj">
+
+<hr />
+
+Dodate slike:
+<img [src]="convertedImage">
