@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UploadImagesComponent } from './real-estate/real-estate-form/upload-images/upload-images.component';
  
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RealEstateListComponent,
     RealEstateFormComponent,
     FilterComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    UploadImagesComponent
   ],
   imports: [
     BrowserModule,

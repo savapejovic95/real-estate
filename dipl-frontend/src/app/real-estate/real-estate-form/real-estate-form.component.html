@@ -1,4 +1,4 @@
-<div class="card my-5">
+<div class="card my-5" *ngIf="!formSubmited">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #realEstateForm="ngForm">
       <div class="form-group">
@@ -137,3 +137,5 @@
     </form>
   </div>
 </div>
+
+<app-upload-images [realEstateId]="realEstateId" *ngIf="formSubmited"></app-upload-images>

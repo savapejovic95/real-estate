@@ -1,5 +1,6 @@
 import { CityPart } from './city-part';
 import { User } from './user';
+import { Image } from './image';
 
 export class RealEstate {
     id: string;
@@ -16,4 +17,5 @@ export class RealEstate {
     description: string;
     additionalInfo: string;
     user: User;
+    image: Image;
 }

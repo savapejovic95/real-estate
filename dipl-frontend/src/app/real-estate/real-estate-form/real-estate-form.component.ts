@@ -18,6 +18,8 @@ export class RealEstateFormComponent implements OnInit {
   city: string;
   partsDisabled: boolean;
   cityPartId: string;
+  formSubmited: boolean;
+  realEstateId: string;
 
   constructor(
     private router: Router,
@@ -36,6 +38,7 @@ export class RealEstateFormComponent implements OnInit {
   ngOnInit(): void {
     this.citiesDropdownRefresh();
     this.partsDisabled = true;
+    this.formSubmited = false;
     this.userService.findUserById("1").subscribe(data => {
       this.realEstate.user =  data;
     });
@@ -69,7 +72,13 @@ export class RealEstateFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.realEstate);
-    this.realEstateService.saveRealEstate(this.realEstate).subscribe(result => this.gotoRealEstatesList());
+    this.realEstateService.saveRealEstate(this.realEstate).subscribe(result => this.goToUploadImages(result.id));
+  }
+
+  goToUploadImages(id:string) {
+    console.log(id);
+    this.realEstateId = id;
+    this.formSubmited = true;
   }
 
   gotoRealEstatesList() {

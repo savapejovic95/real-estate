@@ -2,16 +2,20 @@ package com.fon.bg.ac.dipl.controller;
 
 import com.fon.bg.ac.dipl.domain.City;
 import com.fon.bg.ac.dipl.domain.CityPart;
+import com.fon.bg.ac.dipl.domain.Image;
 import com.fon.bg.ac.dipl.domain.RealEstate;
 import com.fon.bg.ac.dipl.domain.User;
 import com.fon.bg.ac.dipl.service.services.ICityPartsService;
 import com.fon.bg.ac.dipl.service.services.ICityService;
+import com.fon.bg.ac.dipl.service.services.IImageService;
 import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +31,8 @@ public class MainController {
     private ICityService cityService;
     @Autowired
     private ICityPartsService cityPartsService;
+    @Autowired
+    private IImageService imageService;
 
     @PostMapping(path="/add-user")
     public @ResponseBody String addNewUser (
@@ -47,7 +53,7 @@ public class MainController {
     }
 
     @PostMapping(path="/add")
-    public @ResponseBody String addNewRealEstate (
+    public @ResponseBody RealEstate addNewRealEstate (
             @RequestBody Map<String, Object> requestBody) {
 
         String name = (String) requestBody.get("name");
@@ -67,8 +73,9 @@ public class MainController {
         User user = userService.returnUserById((int) userJson.get("id"));
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
-        realEstateService.saveRealEstate(re);
-        return "{\"status\":\"Saved\"}";
+        RealEstate saved = realEstateService.saveRealEstate(re);
+        System.out.println(saved.getId() + " = saved.getId()");
+        return saved;
     }
 
     @GetMapping(path="/all")
@@ -101,6 +108,28 @@ public class MainController {
     public @ResponseBody User getUserById(
             @RequestParam(value = "id", required = true) String id) {
         return userService.returnUserById(Integer.parseInt(id));
+    }
+    
+    @PostMapping(path="/upload-image")
+    public @ResponseBody Image uploadImage (
+    		@RequestParam (value = "image", required = true) MultipartFile file,
+    		@RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
+
+        RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
+        Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
+        Image saved = imageService.saveImage(image);
+        return saved;
+    }
+    
+    @GetMapping(path="/image")
+    public @ResponseBody Image getImageByRealEstateId(
+            @RequestParam(value = "realEstateId", required = true) String realEstateId) {
+        return imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId)).get(0);
+    }
+    
+    @GetMapping(path="/all-images")
+    public @ResponseBody List<Image> getAllImages() {
+        return imageService.returnAllImages();
     }
 
     @GetMapping(path="/filter")
