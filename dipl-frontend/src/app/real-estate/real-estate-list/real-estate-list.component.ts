@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { Image } from 'src/app/model/image';
@@ -11,6 +11,7 @@ import { Image } from 'src/app/model/image';
 export class RealEstateListComponent implements OnInit {
 
   @Input() realEstates: RealEstate[];
+  @Output() selectedRealEstateEvent = new EventEmitter<string>();
   images: Image[];
   imagesAdded: boolean;
 
@@ -37,6 +38,10 @@ export class RealEstateListComponent implements OnInit {
       }
       this.imagesAdded = true;
     });
+  }
+
+  showRealEstate(realEstateId: string){
+    this.selectedRealEstateEvent.emit(realEstateId);
   }
 
 }

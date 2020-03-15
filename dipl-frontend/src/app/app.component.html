@@ -1,8 +1,9 @@
 <app-top-menu></app-top-menu>
 <div class="container">
   <app-filter (filteredRealEstatesEvent)="recieveFilteredRealEstates($event)" *ngIf="_router.url == '/'"></app-filter>
-  <app-real-estate-list [realEstates]="realEstates" *ngIf="_router.url == '/'"></app-real-estate-list>
-  <router-outlet></router-outlet>
+  <app-real-estate-list [realEstates]="realEstates" (selectedRealEstateEvent)="recieveSelectedRealEstate($event)" *ngIf="_router.url == '/'"></app-real-estate-list>
+  <app-real-estate-view [realEstateId]="selectedRealEstateId" *ngIf="_router.url == '/real-estate'"></app-real-estate-view>
+  <!--<router-outlet></router-outlet>-->
   <div class="row">
     <ul class="text-center list-inline py-3">
       <li class="list-inline-item">

@@ -40,7 +40,6 @@ export class FilterComponent implements OnInit {
 
   citiesDropdownRefresh() {
     this.realEstateService.findAllCities().subscribe(data=>{
-      console.log(data);
       data.forEach(element => {
         this.cities.push(element)
       });
