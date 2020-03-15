@@ -4,6 +4,7 @@ import { Filter } from 'src/app/model/filter';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { CityPart } from 'src/app/model/city-part';
 import { City } from 'src/app/model/city';
+import { Image } from 'src/app/model/image';
 
 @Component({
   selector: 'app-filter',
@@ -16,6 +17,7 @@ export class FilterComponent implements OnInit {
   partsDisabled: boolean;
   hideFilters: boolean;
   filter: Filter;
+  images: Image[];
 
   @Output() filteredRealEstatesEvent = new EventEmitter<RealEstate[]>();
  
@@ -64,7 +66,22 @@ export class FilterComponent implements OnInit {
     this.hideFilters = true;
     this.realEstateService.findFilteredRealEstates(this.filter).subscribe(data => {
       this.filteredRealEstates =  data;
+      this.populateImages();
       this.filteredRealEstatesEvent.emit(this.filteredRealEstates);
+    });
+  }
+
+  populateImages(){
+    this.realEstateService.getAllImages().subscribe(data => {
+      this.images = data;
+      for (var realEstate of this.filteredRealEstates) {
+        for (var image of this.images) {
+          image.convertedImage = 'data:image/jpeg;base64,' + image.pic;
+          if(realEstate.id == image.realEstate.id){
+            realEstate.image = image;
+          }
+        }
+      }
     });
   }
 }

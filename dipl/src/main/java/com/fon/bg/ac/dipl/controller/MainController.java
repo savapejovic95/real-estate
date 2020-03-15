@@ -126,6 +126,11 @@ public class MainController {
             @RequestParam(value = "realEstateId", required = true) String realEstateId) {
         return imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId)).get(0);
     }
+    
+    @GetMapping(path="/all-images")
+    public @ResponseBody List<Image> getAllImages() {
+        return imageService.returnAllImages();
+    }
 
     @GetMapping(path="/filter")
     public @ResponseBody Iterable<RealEstate> getFilteredRealEstates(

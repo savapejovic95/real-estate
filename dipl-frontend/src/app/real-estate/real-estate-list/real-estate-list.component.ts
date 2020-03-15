@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
+import { Image } from 'src/app/model/image';
 
 @Component({
   selector: 'app-real-estate-list',
@@ -10,21 +11,27 @@ import { RealEstateService } from 'src/app/service/real-estates.service';
 export class RealEstateListComponent implements OnInit {
 
   @Input() realEstates: RealEstate[];
+  images: Image[];
 
   constructor(private realEstateService: RealEstateService) { }
 
   ngOnInit() {
     this.realEstateService.findAllRealEstates().subscribe(data => {
       this.realEstates = data;
+      this.populateImages();
+    });
+  }
+
+  populateImages(){
+    this.realEstateService.getAllImages().subscribe(data => {
+      this.images = data;
       for (var realEstate of this.realEstates) {
-        this.realEstateService.findImageByRealEstateId(realEstate.id).subscribe(res => {
-            console.log(res);
-            var receivedImageData : any;
-            receivedImageData = res;
-            var base64Data = receivedImageData.pic;
-            realEstate.convertedImage = 'data:image/jpeg;base64,' + base64Data; },
-          err => console.log('Error Occured duringng saving: ' + err)
-        );
+        for (var image of this.images) {
+          image.convertedImage = 'data:image/jpeg;base64,' + image.pic;
+          if(realEstate.id == image.realEstate.id){
+            realEstate.image = image;
+          }
+        }
       }
     });
   }

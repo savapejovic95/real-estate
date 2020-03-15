@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { City } from '../model/city';
 import { CityPart } from '../model/city-part';
 import { Filter } from '../model/filter';
+import { Image } from '../model/image';
  
 @Injectable()
 export class RealEstateService {
@@ -33,6 +34,10 @@ export class RealEstateService {
   public saveImage(uploadData: FormData, realEstateId: string) {
     return this.http.post(
       this.realEstatesUrl + 'upload-image?realEstateId=' + realEstateId, uploadData)
+  }
+
+  public getAllImages(): Observable<Image[]> {
+    return this.http.get<Image[]>(this.realEstatesUrl + 'all-images');
   }
 
   public findImageByRealEstateId(realEstateId: string) {
