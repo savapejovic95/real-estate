@@ -12,10 +12,12 @@ export class RealEstateListComponent implements OnInit {
 
   @Input() realEstates: RealEstate[];
   images: Image[];
+  imagesAdded: boolean;
 
   constructor(private realEstateService: RealEstateService) { }
 
   ngOnInit() {
+    this.imagesAdded = false;
     this.realEstateService.findAllRealEstates().subscribe(data => {
       this.realEstates = data;
       this.populateImages();
@@ -33,6 +35,7 @@ export class RealEstateListComponent implements OnInit {
           }
         }
       }
+      this.imagesAdded = true;
     });
   }
 
