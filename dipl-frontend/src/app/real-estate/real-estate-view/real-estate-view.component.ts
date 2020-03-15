@@ -18,6 +18,9 @@ export class RealEstateViewComponent implements OnInit {
   constructor(private realEstateService: RealEstateService) { }
 
   ngOnInit(): void {
+    if(this.realEstateId == null){
+      return;
+    }
     this.imagesAdded = false;
     this.realEstateService.findRealEstateById(this.realEstateId).subscribe(data => {
       this.realEstate = data;
