@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   realEstates: RealEstate[];
   _router: Router;
+  selectedRealEstateId: string;
  
   constructor(_router: Router) {
     this._router = _router;
@@ -20,7 +21,10 @@ export class AppComponent {
 
   recieveFilteredRealEstates($event){
     this.realEstates = $event;
-    console.log(this.realEstates);
+  }
+
+  recieveSelectedRealEstate($event){
+    this.selectedRealEstateId = $event;
   }
 
 }

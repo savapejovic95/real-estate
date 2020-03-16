@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadImagesComponent } from './real-estate/real-estate-form/upload-images/upload-images.component';
+import { RealEstateViewComponent } from './real-estate/real-estate-view/real-estate-view.component';
  
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UploadImagesComponent } from './real-estate/real-estate-form/upload-ima
     RealEstateFormComponent,
     FilterComponent,
     TopMenuComponent,
-    UploadImagesComponent
+    UploadImagesComponent,
+    RealEstateViewComponent
   ],
   imports: [
     BrowserModule,

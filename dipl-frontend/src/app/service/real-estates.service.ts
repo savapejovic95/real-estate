@@ -31,6 +31,10 @@ export class RealEstateService {
     )
   }
 
+  public findRealEstateById(realEstateId: string): Observable<RealEstate> {
+    return this.http.get<RealEstate>(this.realEstatesUrl + 'real-estate?id=' + realEstateId);
+  }
+
   public saveImage(uploadData: FormData, realEstateId: string) {
     return this.http.post(
       this.realEstatesUrl + 'upload-image?realEstateId=' + realEstateId, uploadData)

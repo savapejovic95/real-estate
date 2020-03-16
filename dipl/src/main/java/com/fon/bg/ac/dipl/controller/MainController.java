@@ -83,6 +83,12 @@ public class MainController {
         return realEstateService.returnAllRealEstates();
     }
 
+    @GetMapping(path="/real-estate")
+    public @ResponseBody RealEstate getRealEstateById(
+            @RequestParam(value = "id", required = true) String id) {
+        return realEstateService.returnRealEstateById(Integer.parseInt(id));
+    }
+
     @GetMapping(path="/cities")
     public @ResponseBody Iterable<City> getAllCities() {
         return cityService.returnAllCities();

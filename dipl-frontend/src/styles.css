@@ -15,3 +15,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .menu-item {
     color: white;
 }
+
+#realEstateView{
+    color: white;
+}
+
+#realEstateImage{
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#realEstateCardImage{
+    max-height: 230px;
+    min-height: 230px;
+}
