@@ -152,77 +152,19 @@ public class MainController {
             @RequestParam(value = "cityId", required = false) String cityId) {
         List<RealEstate> realEstates = realEstateService.returnAllRealEstates();
         List<RealEstate> filteredOut = new ArrayList<>();
-        if(priceFrom != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getPrice() < Double.parseDouble(priceFrom)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(priceTo != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getPrice() > Double.parseDouble(priceTo)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(squareMetersFrom != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(squareMetersTo != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(roomsFrom != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getRooms() < Double.parseDouble(roomsFrom)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(roomsTo != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getRooms() > Double.parseDouble(roomsTo)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(type != null){
-            for (RealEstate realEstate : realEstates) {
-                if(!(realEstate.getType().equals(type))){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(service != null){
-            for (RealEstate realEstate : realEstates) {
-                if(!(realEstate.getService().equals(service))){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(cityPartId != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getCityPart().getId() != Integer.parseInt(cityPartId)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
-        if(cityId != null){
-            for (RealEstate realEstate : realEstates) {
-                if(realEstate.getCityPart().getCity().getId() != Integer.parseInt(cityId)){
-                    filteredOut.add(realEstate);
-                }
-            }
-        }
 
+        for (RealEstate realEstate : realEstates) {
+            if(priceFrom != null && realEstate.getPrice() < Double.parseDouble(priceFrom)){ filteredOut.add(realEstate); }
+            if(priceTo != null && realEstate.getPrice() > Double.parseDouble(priceTo)){ filteredOut.add(realEstate); }
+            if(squareMetersFrom != null && realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){ filteredOut.add(realEstate); }
+            if(squareMetersTo != null && realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){ filteredOut.add(realEstate); }
+            if(roomsFrom != null && realEstate.getRooms() < Double.parseDouble(roomsFrom)){ filteredOut.add(realEstate); }
+            if(roomsTo != null && realEstate.getRooms() > Double.parseDouble(roomsTo)){ filteredOut.add(realEstate); }
+            if(type != null && !(realEstate.getType().equals(type))){ filteredOut.add(realEstate); }
+            if(service != null && !(realEstate.getService().equals(service))){ filteredOut.add(realEstate); }
+            if(cityPartId != null && realEstate.getCityPart().getId() != Integer.parseInt(cityPartId)){ filteredOut.add(realEstate); }
+            if(cityId != null && realEstate.getCityPart().getCity().getId() != Integer.parseInt(cityId)){ filteredOut.add(realEstate); }
+        }
         realEstates.removeAll(filteredOut);
 
         return realEstates;
