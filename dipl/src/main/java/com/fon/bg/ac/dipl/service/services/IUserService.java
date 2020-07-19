@@ -10,5 +10,11 @@ public interface IUserService {
 
     List<User> returnAllUsers();
 
-    User returnUserById(int id);
+    User findById(int id);
+
+    User findByUsername(String username);
+
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
 }

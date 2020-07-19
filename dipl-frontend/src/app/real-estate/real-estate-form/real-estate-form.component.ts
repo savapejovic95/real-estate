@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { City } from 'src/app/model/city';
 import { CityPart } from 'src/app/model/city-part';
-import { User } from 'src/app/model/user';
-import { UserService } from 'src/app/service/user.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-real-estate-form',
@@ -13,7 +12,7 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./real-estate-form.component.css']
 })
 export class RealEstateFormComponent implements OnInit {
-
+  isLoggedIn = false;
   realEstate: RealEstate;
   city: string;
   partsDisabled: boolean;
@@ -24,7 +23,7 @@ export class RealEstateFormComponent implements OnInit {
   constructor(
     private router: Router,
     private realEstateService: RealEstateService,
-    private userService: UserService
+    private tokenStorageService: TokenStorageService
   ) { 
     this.realEstate = new RealEstate();
   }
@@ -36,12 +35,11 @@ export class RealEstateFormComponent implements OnInit {
   public heatingTypes: Array<string> = ["CG", "EG", "TA", "Gas", "Podno"];
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
     this.citiesDropdownRefresh();
     this.partsDisabled = true;
     this.formSubmited = false;
-    this.userService.findUserById("1").subscribe(data => {
-      this.realEstate.user =  data;
-    });
+    this.realEstate.user = this.tokenStorageService.getUser();
   }
 
   citiesDropdownRefresh() {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { Image } from 'src/app/model/image';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-real-estate-view',
@@ -10,14 +11,20 @@ import { Image } from 'src/app/model/image';
 })
 export class RealEstateViewComponent implements OnInit {
 
-  @Input() realEstateId: string;
+  realEstateId: string;
   realEstate : RealEstate;
   images: Image[];
   imagesAdded: boolean;
 
-  constructor(private realEstateService: RealEstateService) { }
+  constructor(private realEstateService: RealEstateService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const realEstateId = params['realEstateId'];
+      if (realEstateId && realEstateId !== '0') {
+          this.realEstateId = params['realEstateId'];
+      }
+    });
     if(this.realEstateId == null){
       return;
     }

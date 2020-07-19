@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { Image } from 'src/app/model/image';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-real-estate-list',
@@ -11,11 +12,10 @@ import { Image } from 'src/app/model/image';
 export class RealEstateListComponent implements OnInit {
 
   @Input() realEstates: RealEstate[];
-  @Output() selectedRealEstateEvent = new EventEmitter<string>();
   images: Image[];
   imagesAdded: boolean;
 
-  constructor(private realEstateService: RealEstateService) { }
+  constructor(private realEstateService: RealEstateService, private router: Router) { }
 
   ngOnInit() {
     this.imagesAdded = false;
@@ -41,7 +41,7 @@ export class RealEstateListComponent implements OnInit {
   }
 
   showRealEstate(realEstateId: string){
-    this.selectedRealEstateEvent.emit(realEstateId);
+    this.router.navigate(['/real-estate/'+realEstateId]);
   }
 
 }

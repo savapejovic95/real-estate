@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -25,7 +26,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User returnUserById(int id) {
+    public User findById(int id) {
         List<User> allUsers = returnAllUsers();
         for (User user : allUsers) {
             if(user.getId().equals(id)) {
@@ -33,5 +34,38 @@ public class UserServiceImpl implements IUserService {
             }
         }
         return null;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        List<User> allUsers = returnAllUsers();
+        for (User user : allUsers) {
+            if(user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean existsByUsername(String username) {
+        List<User> allUsers = returnAllUsers();
+        for (User user : allUsers) {
+            if(user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        List<User> allUsers = returnAllUsers();
+        for (User user : allUsers) {
+            if(user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

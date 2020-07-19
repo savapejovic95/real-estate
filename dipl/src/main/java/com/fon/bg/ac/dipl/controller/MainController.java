@@ -11,7 +11,7 @@ import com.fon.bg.ac.dipl.service.services.IImageService;
 import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
 @RequestMapping(path="/real-estate")
 public class MainController {
     @Autowired
@@ -39,10 +40,12 @@ public class MainController {
             @RequestBody Map<String, Object> requestBody) {
 
         User u = new User();
-        String name = (String) requestBody.get("name");
+        String username = (String) requestBody.get("username");
         String email = (String) requestBody.get("email");
-        u.setName(name);
+        String password = (String) requestBody.get("password");
+        u.setUsername(username);
         u.setEmail(email);
+        u.setPassword(password);
         userService.save(u);
         return "{\"status\":\"Saved\"}";
     }
@@ -70,7 +73,7 @@ public class MainController {
         String description = (String) requestBody.get("description");
         String additionalInfo = (String) requestBody.get("additionalInfo");
         Map<String, Object> userJson = (Map<String, Object>) requestBody.get("user");
-        User user = userService.returnUserById((int) userJson.get("id"));
+        User user = userService.findById((int) userJson.get("id"));
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
         RealEstate saved = realEstateService.saveRealEstate(re);
@@ -113,7 +116,7 @@ public class MainController {
     @GetMapping(path="/user")
     public @ResponseBody User getUserById(
             @RequestParam(value = "id", required = true) String id) {
-        return userService.returnUserById(Integer.parseInt(id));
+        return userService.findById(Integer.parseInt(id));
     }
     
     @PostMapping(path="/upload-image")

@@ -1,0 +1,4 @@
+<div class="container">
+    <app-filter (filteredRealEstatesEvent)="recieveFilteredRealEstates($event)" ></app-filter>
+    <app-real-estate-list [realEstates]="realEstates" (selectedRealEstateEvent)="recieveSelectedRealEstate($event)"></app-real-estate-list>
+</div>

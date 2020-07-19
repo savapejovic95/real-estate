@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user/user-list/user-list.component';
-import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserService } from './service/user.service';
 import { RealEstateService } from './service/real-estates.service';
 import { RealEstateListComponent } from './real-estate/real-estate-list/real-estate-list.component';
@@ -22,18 +21,26 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadImagesComponent } from './real-estate/real-estate-form/upload-images/upload-images.component';
 import { RealEstateViewComponent } from './real-estate/real-estate-view/real-estate-view.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { RealEstateComponent } from './real-estate/real-estate.component';
  
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    UserFormComponent,
     RealEstateListComponent,
     RealEstateFormComponent,
     FilterComponent,
     TopMenuComponent,
     UploadImagesComponent,
-    RealEstateViewComponent
+    RealEstateViewComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    RealEstateComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,7 @@ import { RealEstateViewComponent } from './real-estate/real-estate-view/real-est
     MatListModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService, RealEstateService],
+  providers: [UserService, RealEstateService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
