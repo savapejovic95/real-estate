@@ -1,4 +1,4 @@
-<div class="card my-5" *ngIf="!formSubmited">
+<div class="card my-5" *ngIf="!formSubmited && isLoggedIn">
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #realEstateForm="ngForm">
       <div class="form-group">
@@ -139,3 +139,23 @@
 </div>
 
 <app-upload-images [realEstateId]="realEstateId" *ngIf="formSubmited"></app-upload-images>
+
+<div class="container" *ngIf="!isLoggedIn">
+  <header class="jumbotron">
+    <span>Morate se ulogovati!</span>
+    <a routerLink="/login">
+      <button
+        type="button"
+        mat-icon-button style="margin-right: 50px; margin-left: 20px; color: deepskyblue">
+        <mat-icon>person_outline</mat-icon><span> Prijava</span>
+      </button>
+    </a>
+    <a routerLink="/register">
+      <button
+        type="button"
+        mat-icon-button style="margin-right: 40px; color: deepskyblue;">
+        <mat-icon>person_add</mat-icon><span> Registracija</span>
+      </button>
+    </a>
+  </header>
+</div>

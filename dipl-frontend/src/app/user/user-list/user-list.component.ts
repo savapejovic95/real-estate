@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
  
 @Component({
   selector: 'app-user-list',
@@ -10,11 +11,14 @@ import { UserService } from 'src/app/service/user.service';
 export class UserListComponent implements OnInit {
  
   users: User[];
+  isAdmin = false;
  
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private tokenStorageService: TokenStorageService) {
   }
  
   ngOnInit() {
+    const user = this.tokenStorageService.getUser();
+    this.isAdmin = user.roles.includes('ROLE_ADMIN');
     this.userService.findAll().subscribe(data => {
       this.users = data;
     });
