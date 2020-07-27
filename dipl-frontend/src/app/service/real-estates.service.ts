@@ -33,6 +33,10 @@ export class RealEstateService {
     return this.http.get<RealEstate>(REAL_ESTATES_URL + 'real-estate?id=' + realEstateId);
   }
 
+  public findRealEstatesFromUser(userId: string): Observable<RealEstate[]> {
+    return this.http.get<RealEstate[]>(REAL_ESTATES_URL + 'all?userId=' + userId);
+  }
+
   public saveImage(uploadData: FormData, realEstateId: string) {
     return this.http.post(
       REAL_ESTATES_URL + 'upload-image?realEstateId=' + realEstateId, uploadData)

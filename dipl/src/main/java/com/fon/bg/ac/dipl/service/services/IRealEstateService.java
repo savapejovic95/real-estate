@@ -9,6 +9,8 @@ public interface IRealEstateService {
     List<RealEstate> returnAllRealEstates();
 
     RealEstate saveRealEstate(RealEstate realEstate);
-    
+
     RealEstate returnRealEstateById(int id);
+
+    List<RealEstate> returnRealEstatesByUserId(String userId);
 }

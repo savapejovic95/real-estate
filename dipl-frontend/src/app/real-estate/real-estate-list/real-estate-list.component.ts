@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RealEstate } from 'src/app/model/real-estate';
 import { RealEstateService } from 'src/app/service/real-estates.service';
 import { Image } from 'src/app/model/image';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-real-estate-list',
@@ -15,13 +15,23 @@ export class RealEstateListComponent implements OnInit {
   images: Image[];
   imagesAdded: boolean;
 
-  constructor(private realEstateService: RealEstateService, private router: Router) { }
+  constructor(private realEstateService: RealEstateService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.imagesAdded = false;
-    this.realEstateService.findAllRealEstates().subscribe(data => {
-      this.realEstates = data;
-      this.populateImages();
+    this.route.params.subscribe(params => {
+      const userId = params['userId'];
+      if (userId && userId !== '0') {
+        this.realEstateService.findRealEstatesFromUser(userId).subscribe(data => {
+          this.realEstates = data;
+          this.populateImages();
+        });
+      } else {
+        this.realEstateService.findAllRealEstates().subscribe(data => {
+          this.realEstates = data;
+          this.populateImages();
+        });
+      }
     });
   }
 

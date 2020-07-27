@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'real-estate/:realEstateId', component: RealEstateViewComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'my-listings/:userId', component: RealEstateListComponent }
 ];
  
 @NgModule({

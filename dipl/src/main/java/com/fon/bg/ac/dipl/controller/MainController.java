@@ -11,7 +11,6 @@ import com.fon.bg.ac.dipl.service.services.IImageService;
 import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import com.fon.bg.ac.dipl.service.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,8 +81,14 @@ public class MainController {
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<RealEstate> getAllRealEstates() {
-        return realEstateService.returnAllRealEstates();
+    public @ResponseBody Iterable<RealEstate> getAllRealEstates(
+            @RequestParam(value = "userId", required = false) String userId
+    ) {
+        if(userId == null) {
+            return realEstateService.returnAllRealEstates();
+        } else {
+            return realEstateService.returnRealEstatesByUserId(userId);
+        }
     }
 
     @GetMapping(path="/real-estate")
@@ -118,24 +123,24 @@ public class MainController {
             @RequestParam(value = "id", required = true) String id) {
         return userService.findById(Integer.parseInt(id));
     }
-    
+
     @PostMapping(path="/upload-image")
     public @ResponseBody Image uploadImage (
-    		@RequestParam (value = "image", required = true) MultipartFile file,
-    		@RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
+            @RequestParam (value = "image", required = true) MultipartFile file,
+            @RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
 
         RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
         Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
         Image saved = imageService.saveImage(image);
         return saved;
     }
-    
+
     @GetMapping(path="/image")
     public @ResponseBody Image getImageByRealEstateId(
             @RequestParam(value = "realEstateId", required = true) String realEstateId) {
         return imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId)).get(0);
     }
-    
+
     @GetMapping(path="/all-images")
     public @ResponseBody List<Image> getAllImages() {
         return imageService.returnAllImages();

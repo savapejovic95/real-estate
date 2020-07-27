@@ -13,6 +13,7 @@ export class TopMenuComponent {
   isAdmin = false;
   isModerator = false;
   username: string;
+  userId: string;
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
 
@@ -27,6 +28,7 @@ export class TopMenuComponent {
       this.isModerator = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
+      this.userId = user.id;
     }
   }
 
