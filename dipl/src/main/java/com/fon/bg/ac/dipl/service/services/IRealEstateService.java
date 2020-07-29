@@ -13,4 +13,6 @@ public interface IRealEstateService {
     RealEstate returnRealEstateById(int id);
 
     List<RealEstate> returnRealEstatesByUserId(String userId);
+
+    RealEstate deleteRealEstate(RealEstate realEstate);
 }

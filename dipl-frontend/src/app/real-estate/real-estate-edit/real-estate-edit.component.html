@@ -1,0 +1,161 @@
+<div class="card my-5" *ngIf="!formSubmited && isLoggedIn && realEstate">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #realEstateForm="ngForm">
+        <div class="form-group">
+          <label for="name">Naziv*</label>
+          <input type="text" [(ngModel)]="realEstate.name" 
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Unesite naziv oglasa"
+            required #name="ngModel">
+        </div>
+        <div class="form-group">
+          <label for="price">Cena*</label>
+          <input type="text" [(ngModel)]="realEstate.price" 
+            class="form-control"
+            id="price"
+            name="price"
+            placeholder="Unesite cenu"
+            required #price="ngModel">
+        </div>
+        <div class="form-group">
+            <label for="squareMeters">Kvadratura*</label>
+            <input type="text" [(ngModel)]="realEstate.squareMeters" 
+              class="form-control"
+              id="squareMeters"
+              name="squareMeters"
+              placeholder="Unesite kvadraturu"
+              required #squareMeters="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="rooms">Broj Soba</label>
+            <input type="text" [(ngModel)]="realEstate.rooms" 
+              class="form-control"
+              id="rooms"
+              name="rooms"
+              placeholder="Unesite broj soba"
+              #rooms="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="type">Tip*</label>
+            <select type="text" [(ngModel)]="realEstate.type" 
+              class="form-control"
+              id="type"
+              name="type"
+              placeholder="Izaberite tip"
+              required #type="ngModel">
+              <option *ngFor="let type of types" [value]="type">
+                {{type}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="service">Vrsta oglasa*</label>
+            <select type="text" [(ngModel)]="realEstate.service" 
+              class="form-control"
+              id="service"
+              name="service"
+              placeholder="Izaberite vrstu oglasa"
+              required #service="ngModel">
+              <option *ngFor="let service of services" [value]="service">
+                {{service}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="city">Grad*</label>
+            <select type="text" [(ngModel)]="city" (change)="onCityChange()"
+              class="form-control"
+              id="city"
+              name="city"
+              required>
+              <option *ngFor="let city of cities" [value]="city.id">
+                {{city.name}}
+              </option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="cityPart">Deo grada*</label>
+            <select type="text" [(ngModel)]="cityPartId" (change)="onCityPartChange()"
+              class="form-control"
+              id="cityPart"
+              name="cityPart"
+              required [disabled]="partsDisabled">
+              <option *ngFor="let cityPart of cityParts" [value]="cityPart.id">
+                {{cityPart.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="address">Adresa*</label>
+            <input type="text" [(ngModel)]="realEstate.address" 
+              class="form-control"
+              id="address"
+              name="address"
+              placeholder="Unesite ulicu i broj">
+          </div>
+          <div class="form-group">
+            <label for="heating">Grejanje</label>
+            <select type="text" [(ngModel)]="realEstate.heating" 
+              class="form-control"
+              id="heating"
+              name="heating"
+              placeholder="Izaberite tip grejanja"
+              #heating="ngModel">
+              <option *ngFor="let heating of heatingTypes" [value]="heating">
+                {{heating}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="floor">Sprat</label>
+            <input type="text" [(ngModel)]="realEstate.floor" 
+              class="form-control"
+              id="floor"
+              name="floor"
+              placeholder="Izaberite sprat">
+          </div>
+          <div class="form-group">
+            <label for="description">Opis</label>
+            <input type="text" [(ngModel)]="realEstate.description" 
+              class="form-control"
+              id="description"
+              name="description"
+              placeholder="Opis...">
+          </div>
+          <div class="form-group">
+            <label for="additionalInfo">Dodatne informacije</label>
+            <input type="text" [(ngModel)]="realEstate.additionalInfo" 
+              class="form-control"
+              id="additionalInfo"
+              name="additionalInfo"
+              placeholder="Unesite dodatne informacije">
+          </div>
+        <button type="submit" [disabled]="!realEstateForm.form.valid" 
+          class="btn btn-info">Sacuvaj izmene</button>
+      </form>
+    </div>
+  </div>
+  
+  <app-upload-images [realEstateId]="realEstateId" *ngIf="formSubmited"></app-upload-images>
+  
+  <div class="container" *ngIf="!isLoggedIn">
+    <header class="jumbotron">
+      <span>Morate se ulogovati!</span>
+      <a routerLink="/login">
+        <button
+          type="button"
+          mat-icon-button style="margin-right: 50px; margin-left: 20px; color: deepskyblue">
+          <mat-icon>person_outline</mat-icon><span> Prijava</span>
+        </button>
+      </a>
+      <a routerLink="/register">
+        <button
+          type="button"
+          mat-icon-button style="margin-right: 40px; color: deepskyblue;">
+          <mat-icon>person_add</mat-icon><span> Registracija</span>
+        </button>
+      </a>
+    </header>
+  </div>

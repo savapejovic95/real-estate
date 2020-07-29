@@ -47,4 +47,10 @@ public class RealEstateServiceImpl implements IRealEstateService {
         }
         return userRealEstates;
     }
+
+    @Override
+    public RealEstate deleteRealEstate(RealEstate realEstate) {
+        realEstateRepository.delete(realEstate);
+        return realEstate;
+    }
 }

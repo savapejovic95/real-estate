@@ -13,4 +13,6 @@ public interface IImageService {
     List<Image> returnImagesByRealEstateId(int realEstateId);
     
     List<Image> returnAllImages();
+
+    void deleteImage(Image image);
 }

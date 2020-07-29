@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin-bottom: 40px;">
   <div class="col-md-4" *ngFor="let realEstate of realEstates">
     <mat-card class="example-card" id="realEstateListItem" style="margin-top: 20px; padding-bottom: 60px; background-color: #2d3339;">
       <mat-card-header>
@@ -11,8 +11,25 @@
         Kvadratura: {{ realEstate.squareMeters }} m2
       </mat-card-content>
       <mat-card-actions>
+        <button mat-button 
+          class="btn btn-info"
+          style="float: right;" [style.display]="realEstate.user.id != currentUserId ? 'none' : 'box'" (click)="deleteRealEstate(realEstate.id)">Ukloni</button>
+        <button mat-button 
+          class="btn btn-info" 
+          routerLink="/real-estate" 
+          style="float: right; margin: 0px;" [style.display]="realEstate.user.id != currentUserId ? 'none' : 'box'" (click)="editRealEstate(realEstate.id)">Izmeni</button>
         <button mat-button class="btn btn-info" routerLink="/real-estate" style="float: right;" (click)="showRealEstate(realEstate.id)">Pogledaj</button>
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+<div *ngIf="realEstates && realEstates.length == 0">
+  <h2>Niste objavili ni jednu nekretninu!</h2>
+  <a routerLink="/add-real-estate">
+    <button
+      type="button"
+      mat-icon-button style="font-size: 20px;">
+      <mat-icon>add_box</mat-icon><span> Kreiraj novu nekretninu</span>
+    </button>
+  </a>
 </div>

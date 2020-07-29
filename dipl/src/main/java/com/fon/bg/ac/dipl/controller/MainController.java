@@ -61,7 +61,7 @@ public class MainController {
         String name = (String) requestBody.get("name");
         double price = Double.parseDouble((String) requestBody.get("price"));
         double squareMeters = Double.parseDouble((String) requestBody.get("squareMeters"));
-        double rooms = Double.parseDouble((String) requestBody.get("rooms"));
+        double rooms = requestBody.get("rooms") != null &&  !requestBody.get("rooms").toString().isEmpty() ? Double.parseDouble((String) requestBody.get("rooms")) : 0;
         String type = (String) requestBody.get("type");
         String service = (String) requestBody.get("service");
         Map<String, Object> cityPartJson = (Map<String, Object>) requestBody.get("cityPart");
@@ -76,8 +76,27 @@ public class MainController {
 
         RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
         RealEstate saved = realEstateService.saveRealEstate(re);
-        System.out.println(saved.getId() + " = saved.getId()");
+        System.out.println(saved.getId() + " = saved");
         return saved;
+    }
+
+    @PostMapping(path="/update")
+    public @ResponseBody RealEstate updateRealEstate (
+            @RequestBody RealEstate realEstate) {
+        RealEstate updated = realEstateService.saveRealEstate(realEstate);
+        System.out.println(updated.getId() + " = updated");
+        return updated;
+    }
+
+    @DeleteMapping(path="/delete")
+    public @ResponseBody boolean deleteRealEstate(
+            @RequestParam(value = "id") String realEstateId) {
+        List<Image> images = imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId));
+        for (Image image : images) {
+            imageService.deleteImage(image);
+        }
+        RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
+        return realEstateService.deleteRealEstate(re) != null;
     }
 
     @GetMapping(path="/all")
@@ -93,7 +112,7 @@ public class MainController {
 
     @GetMapping(path="/real-estate")
     public @ResponseBody RealEstate getRealEstateById(
-            @RequestParam(value = "id", required = true) String id) {
+            @RequestParam(value = "id") String id) {
         return realEstateService.returnRealEstateById(Integer.parseInt(id));
     }
 
@@ -114,30 +133,29 @@ public class MainController {
 
     @GetMapping(path="/city-part")
     public @ResponseBody CityPart getCityPartById(
-            @RequestParam(value = "id", required = true) String id) {
+            @RequestParam(value = "id") String id) {
         return cityPartsService.returnCityPartById(Integer.parseInt(id));
     }
 
     @GetMapping(path="/user")
     public @ResponseBody User getUserById(
-            @RequestParam(value = "id", required = true) String id) {
+            @RequestParam(value = "id") String id) {
         return userService.findById(Integer.parseInt(id));
     }
 
     @PostMapping(path="/upload-image")
     public @ResponseBody Image uploadImage (
-            @RequestParam (value = "image", required = true) MultipartFile file,
-            @RequestParam (value = "realEstateId", required = true) String realEstateId) throws IOException {
+            @RequestParam (value = "image") MultipartFile file,
+            @RequestParam (value = "realEstateId") String realEstateId) throws IOException {
 
         RealEstate re = realEstateService.returnRealEstateById(Integer.parseInt(realEstateId));
         Image image = new Image(file.getOriginalFilename(), file.getContentType(), file.getBytes(), re);
-        Image saved = imageService.saveImage(image);
-        return saved;
+        return imageService.saveImage(image);
     }
 
     @GetMapping(path="/image")
     public @ResponseBody Image getImageByRealEstateId(
-            @RequestParam(value = "realEstateId", required = true) String realEstateId) {
+            @RequestParam(value = "realEstateId") String realEstateId) {
         return imageService.returnImagesByRealEstateId(Integer.parseInt(realEstateId)).get(0);
     }
 
