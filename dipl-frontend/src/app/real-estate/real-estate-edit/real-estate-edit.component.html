@@ -1,4 +1,4 @@
-<div class="card my-5" *ngIf="!formSubmited && isLoggedIn && realEstate">
+<div class="card my-5" *ngIf="isLoggedIn && realEstate">
     <div class="card-body">
       <form (ngSubmit)="onSubmit()" #realEstateForm="ngForm">
         <div class="form-group">
@@ -134,11 +134,10 @@
           </div>
         <button type="submit" [disabled]="!realEstateForm.form.valid" 
           class="btn btn-info">Sacuvaj izmene</button>
+          <button class="btn btn-info" style="float: right;" (click)="goToMyListings()">Otkazi</button>
       </form>
     </div>
   </div>
-  
-  <app-upload-images [realEstateId]="realEstateId" *ngIf="formSubmited"></app-upload-images>
   
   <div class="container" *ngIf="!isLoggedIn">
     <header class="jumbotron">

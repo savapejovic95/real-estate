@@ -18,8 +18,8 @@ export class RealEstateEditComponent implements OnInit {
   city: string;
   partsDisabled: boolean;
   cityPartId: string;
-  formSubmited: boolean;
   realEstateId: string;
+  userId: string;
 
   constructor(
     private router: Router,
@@ -41,9 +41,12 @@ export class RealEstateEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.userId = user.id;
+    }
     this.citiesDropdownRefresh();
     this.partsDisabled = true;
-    this.formSubmited = false;
   }
 
   citiesDropdownRefresh() {
@@ -77,14 +80,7 @@ export class RealEstateEditComponent implements OnInit {
     this.realEstateService.updateRealEstate(this.realEstate).subscribe(result => console.log(result));
   }
 
-  goToUploadImages(id:string) {
-    console.log(id);
-    this.realEstateId = id;
-    this.formSubmited = true;
+  goToMyListings() {
+    this.router.navigate(['/my-listings/'+this.userId]);
   }
-
-  gotoRealEstatesList() {
-    this.router.navigate(['/all']);
-  }
-
 }
