@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RealEstateService } from 'src/app/service/real-estates.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-upload-images',
@@ -10,19 +12,25 @@ export class UploadImagesComponent implements OnInit {
 
   @Input() realEstateId: string;
 
-  constructor(private realEstateService: RealEstateService) { }
-
-  title = 'ImageUploaderFrontEnd';
-
-  public selectedFile;
-  public event1;
   imgURL: any;
   receivedImageData: any;
   base64Data: any;
-  convertedImage: any;
+  convertedImages = [];
+  public selectedFile;
+  isLoggedIn = false;
+  userId: string;
+
+  constructor(
+    private realEstateService: RealEstateService,
+    private router: Router,
+    private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    console.log("UPLOAD IMAGES COMPONENT: " + this.realEstateId);
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.userId = user.id;
+    }
   }
 
   public  onFileChanged(event) {
@@ -30,7 +38,7 @@ export class UploadImagesComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event2) => {
+    reader.onload = (event) => {
       this.imgURL = reader.result;
     };
   }
@@ -42,9 +50,16 @@ export class UploadImagesComponent implements OnInit {
         console.log(res);
         this.receivedImageData = res;
         this.base64Data = this.receivedImageData.pic;
-        this.convertedImage = 'data:image/jpeg;base64,' + this.base64Data; },
+        var convertedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        this.convertedImages.push(convertedImage);
+      },
       err => console.log('Error Occured duringng saving: ' + err)
     );
+    this.imgURL = null;
+  }
+
+  onFinish() {
+    this.router.navigate(['/my-listings/'+this.userId]);
   }
 
 }

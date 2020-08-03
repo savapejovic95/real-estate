@@ -7,8 +7,11 @@
 </div>
 <br>
 <input type="button" class="btn btn-info" (click)="onUpload()" value="Dodaj">
+<input type="button" class="btn btn-info" style="margin-left: 15px;" (click)="onFinish()" value="Gotovo">
 
 <hr />
 
 Dodate slike:
-<img [src]="convertedImage">
+<div *ngFor="let convertedImage of convertedImages">
+    <img [src]="convertedImage">
+</div>
