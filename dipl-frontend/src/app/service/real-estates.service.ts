@@ -29,8 +29,32 @@ export class RealEstateService {
     )
   }
 
+  public updateRealEstate(realEstate: RealEstate) {
+    return this.http.post<RealEstate>(
+      REAL_ESTATES_URL + 'update', realEstate,
+      {
+        headers: new HttpHeaders({
+             'Content-Type':  'application/json',
+           })
+      }
+    )
+  }
+
+  public deleteRealEstate(realEstateId: string) {
+    return this.http.delete<RealEstate>(
+      REAL_ESTATES_URL + 'delete?id=' + realEstateId,{
+        headers: new HttpHeaders({
+             'Content-Type':  'application/json',
+           })
+      });
+  }
+
   public findRealEstateById(realEstateId: string): Observable<RealEstate> {
     return this.http.get<RealEstate>(REAL_ESTATES_URL + 'real-estate?id=' + realEstateId);
+  }
+
+  public findRealEstatesFromUser(userId: string): Observable<RealEstate[]> {
+    return this.http.get<RealEstate[]>(REAL_ESTATES_URL + 'all?userId=' + userId);
   }
 
   public saveImage(uploadData: FormData, realEstateId: string) {

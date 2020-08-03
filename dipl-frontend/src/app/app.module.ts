@@ -26,6 +26,9 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { RealEstateComponent } from './real-estate/real-estate.component';
+import { RealEstateEditComponent } from './real-estate/real-estate-edit/real-estate-edit.component';
+import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
  
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { RealEstateComponent } from './real-estate/real-estate.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    RealEstateComponent
+    RealEstateComponent,
+    RealEstateEditComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { RealEstateComponent } from './real-estate/real-estate.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [UserService, RealEstateService, authInterceptorProviders],
   bootstrap: [AppComponent]

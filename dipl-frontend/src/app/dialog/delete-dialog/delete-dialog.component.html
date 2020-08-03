@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Brisanje nekretnine</h2>
+<mat-dialog-content>
+  <p>Da li ste sigurni da zelite da obrisete oglas?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Izadji</button>
+  <button mat-button (click)="deleteRealEstate()" cdkFocusInitial>Ukloni</button>
+</mat-dialog-actions>

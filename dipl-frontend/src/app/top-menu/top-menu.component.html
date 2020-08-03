@@ -13,7 +13,7 @@
       <mat-icon>add_box</mat-icon><span> Dodaj Nekretninu</span>
     </button>
   </a>
-  <a routerLink="/" class="menu-item" style="position: absolute; right: 0px; margin-right: 330px;" *ngIf="isLoggedIn && !isAdmin">
+  <a [routerLink]="['my-listings', userId]" class="menu-item" style="position: absolute; right: 0px; margin-right: 330px;" *ngIf="isLoggedIn && !isAdmin">
     <button
       type="button"
       mat-icon-button>
