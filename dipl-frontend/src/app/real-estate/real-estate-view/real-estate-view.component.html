@@ -14,7 +14,12 @@
                       </div>
                       <br>
                       <h6>Lokacija: {{ realEstate.cityPart.city.name }} > {{ realEstate.cityPart.name }} > {{ realEstate.address }}</h6>
-                      <img mat-card-image id="realEstateImage" [src]="realEstate.image.convertedImage" alt="Appartment Image">
+                      <div class="row" style="margin-top: 30px;">
+                        <div class="col-md-2" style="margin-top: 200px;"><button mat-button class="btn btn-info" [disabled]="isFirst" (click)="previousPic()">Prethodna</button></div>
+                        <div class="col-md-8"><img mat-card-image [src]="currentImageUrl" alt="Appartment Image" class="uploadedImg"></div>
+                        <div class="col-md-2" style="margin-top: 200px;"><button mat-button class="btn btn-info" [disabled]="isLast" (click)="nextPic()">Sledeca</button></div>
+                      </div>
+                      <h6 style="text-align: center; margin-top: 15px;">Slika {{ currImageIndex+1 }}/{{ realEstate.images.length }}</h6>
                       <div style="margin-left: 40px;">
                         <p>{{ realEstate.description }}</p>
                         <h6>Dodatno:</h6>

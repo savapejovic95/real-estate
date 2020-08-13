@@ -74,10 +74,11 @@ export class FilterComponent implements OnInit {
     this.realEstateService.getAllImages().subscribe(data => {
       this.images = data;
       for (var realEstate of this.filteredRealEstates) {
+        realEstate.images = [];
         for (var image of this.images) {
           image.convertedImage = 'data:image/jpeg;base64,' + image.pic;
           if(realEstate.id == image.realEstate.id){
-            realEstate.image = image;
+            realEstate.images.push(image);
           }
         }
       }

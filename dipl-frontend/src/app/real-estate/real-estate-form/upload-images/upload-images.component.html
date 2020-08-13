@@ -13,5 +13,17 @@
 
 Dodate slike:
 <div *ngFor="let convertedImage of convertedImages">
-    <img [src]="convertedImage">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-dark my-5">
+        <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                    <img [src]="convertedImage" class="uploadedImg">
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
