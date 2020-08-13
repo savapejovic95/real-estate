@@ -15,13 +15,17 @@
                       <br>
                       <h6>Lokacija: {{ realEstate.cityPart.city.name }} > {{ realEstate.cityPart.name }} > {{ realEstate.address }}</h6>
                       <div class="row" style="margin-top: 30px;">
-                        <div class="col-md-2" style="margin-top: 200px;"><button mat-button class="btn btn-info" [disabled]="isFirst" (click)="previousPic()">Prethodna</button></div>
+                        <div class="col-md-2" style="margin-top: 200px; width:100%; display: flex; justify-content: center; margin-bottom: 310px;"><button mat-button class="btn btn-info" [disabled]="isFirst" (click)="previousPic()">Prethodna</button></div>
                         <div class="col-md-8"><img mat-card-image [src]="currentImageUrl" alt="Appartment Image" class="uploadedImg"></div>
-                        <div class="col-md-2" style="margin-top: 200px;"><button mat-button class="btn btn-info" [disabled]="isLast" (click)="nextPic()">Sledeca</button></div>
+                        <div class="col-md-2" style="margin-top: 200px; width:100%; display: flex; justify-content: center; margin-bottom: 310px;"><button mat-button class="btn btn-info" [disabled]="isLast" (click)="nextPic()">Sledeca</button></div>
                       </div>
                       <h6 style="text-align: center; margin-top: 15px;">Slika {{ currImageIndex+1 }}/{{ realEstate.images.length }}</h6>
                       <div style="margin-left: 40px;">
                         <p>{{ realEstate.description }}</p>
+                        <div class="row">
+                          <div class="col-md-6"><p><span style="font-weight: 500;">Grejanje:</span> {{ realEstate.heating }}</p></div>
+                          <div class="col-md-6"><p><span style="font-weight: 500;">Sprat:</span> {{ realEstate.floor }}</p></div>
+                        </div>
                         <h6>Dodatno:</h6>
                         <p>{{ realEstate.additionalInfo }}</p>
                     </div>
