@@ -17,5 +17,5 @@ export class RealEstate {
     description: string;
     additionalInfo: string;
     user: User;
-    image: Image;
+    images: Image[];
 }

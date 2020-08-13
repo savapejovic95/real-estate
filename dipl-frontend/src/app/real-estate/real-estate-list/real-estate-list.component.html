@@ -5,7 +5,7 @@
         <mat-card-title>{{ realEstate.name }}</mat-card-title>
         <mat-card-subtitle>{{ realEstate.description }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image id="realEstateCardImage" *ngIf="imagesAdded" [src]="realEstate.image.convertedImage" alt="Appartment Image">
+      <img mat-card-image id="realEstateCardImage" *ngIf="imagesAdded" [src]="realEstate.images[0].convertedImage" alt="Appartment Image">
       <mat-card-content>
         Cena: {{ realEstate.price }} €<br>
         Kvadratura: {{ realEstate.squareMeters }} m2

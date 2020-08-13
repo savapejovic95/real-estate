@@ -15,6 +15,10 @@ export class RealEstateViewComponent implements OnInit {
   realEstate : RealEstate;
   images: Image[];
   imagesAdded: boolean;
+  isFirst = true;
+  isLast = false;
+  currentImageUrl: string;
+  currImageIndex = 0;
 
   constructor(private realEstateService: RealEstateService, private route: ActivatedRoute) { }
 
@@ -31,6 +35,7 @@ export class RealEstateViewComponent implements OnInit {
     this.imagesAdded = false;
     this.realEstateService.findRealEstateById(this.realEstateId).subscribe(data => {
       this.realEstate = data;
+      this.realEstate.images = [];
       this.populateImage();
     });
   }
@@ -41,11 +46,33 @@ export class RealEstateViewComponent implements OnInit {
       for (var image of this.images) {
         image.convertedImage = 'data:image/jpeg;base64,' + image.pic;
         if(this.realEstate.id == image.realEstate.id){
-          this.realEstate.image = image;
+          this.realEstate.images.push(image);
         }
+      }
+      this.currentImageUrl = this.realEstate.images[0].convertedImage;
+      if(this.realEstate.images.length == 1){
+        this.isLast = true;
       }
       this.imagesAdded = true;
     });
+  }
+
+  previousPic(){
+    this.isLast = false;
+    this.currImageIndex--;
+    this.currentImageUrl = this.realEstate.images[this.currImageIndex].convertedImage;
+    if(this.currImageIndex == 0){
+      this.isFirst = true;
+    }
+  }
+
+  nextPic(){
+    this.isFirst = false;
+    this.currImageIndex++;
+    this.currentImageUrl = this.realEstate.images[this.currImageIndex].convertedImage;
+    if(this.currImageIndex == this.realEstate.images.length-1){
+      this.isLast = true;
+    }
   }
 
 }
