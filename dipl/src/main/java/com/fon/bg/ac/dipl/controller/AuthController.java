@@ -62,7 +62,8 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(jwt,
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
+												 userDetails.getEmail(),
+												 userDetails.getPhoneNumber(),
 												 roles));
 	}
 
@@ -83,6 +84,7 @@ public class AuthController {
 		// Create new user's account
 		User user = new User(signUpRequest.getUsername(),
 							 signUpRequest.getEmail(),
+							 signUpRequest.getPhoneNumber(),
 							 encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();

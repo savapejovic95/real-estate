@@ -13,6 +13,10 @@
       <strong>Email:</strong>
       {{ currentUser.email }}
     </p>
+    <p>
+      <strong>Broj telefona:</strong>
+      {{ currentUser.phoneNumber }}
+    </p>
     <strong>Vrsta naloga:</strong>
     <ul>
       <li *ngFor="let role of currentUser.roles">
