@@ -93,4 +93,9 @@ export class FilterComponent implements OnInit {
     });
     this.filter = new Filter();
   }
+
+  numberOnly(event): boolean {
+    var rgx = /^[0-9]*\.?[0-9]*$/;
+    return event.key.match(rgx) != null;
+  }
 }

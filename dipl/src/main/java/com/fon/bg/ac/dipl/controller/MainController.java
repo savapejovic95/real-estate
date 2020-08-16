@@ -180,12 +180,12 @@ public class MainController {
         List<RealEstate> filteredOut = new ArrayList<>();
 
         for (RealEstate realEstate : realEstates) {
-            if(priceFrom != null && realEstate.getPrice() < Double.parseDouble(priceFrom)){ filteredOut.add(realEstate); }
-            if(priceTo != null && realEstate.getPrice() > Double.parseDouble(priceTo)){ filteredOut.add(realEstate); }
-            if(squareMetersFrom != null && realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){ filteredOut.add(realEstate); }
-            if(squareMetersTo != null && realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){ filteredOut.add(realEstate); }
-            if(roomsFrom != null && realEstate.getRooms() < Double.parseDouble(roomsFrom)){ filteredOut.add(realEstate); }
-            if(roomsTo != null && realEstate.getRooms() > Double.parseDouble(roomsTo)){ filteredOut.add(realEstate); }
+            if(priceFrom != null && !priceFrom.isEmpty() && realEstate.getPrice() < Double.parseDouble(priceFrom)){ filteredOut.add(realEstate); }
+            if(priceTo != null && !priceTo.isEmpty() && realEstate.getPrice() > Double.parseDouble(priceTo)){ filteredOut.add(realEstate); }
+            if(squareMetersFrom != null && !squareMetersFrom.isEmpty() && realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){ filteredOut.add(realEstate); }
+            if(squareMetersTo != null && !squareMetersTo.isEmpty() && realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){ filteredOut.add(realEstate); }
+            if(roomsFrom != null && !roomsFrom.isEmpty() && realEstate.getRooms() < Double.parseDouble(roomsFrom)){ filteredOut.add(realEstate); }
+            if(roomsTo != null && !roomsTo.isEmpty() && realEstate.getRooms() > Double.parseDouble(roomsTo)){ filteredOut.add(realEstate); }
             if(type != null && !(realEstate.getType().equals(type))){ filteredOut.add(realEstate); }
             if(service != null && !(realEstate.getService().equals(service))){ filteredOut.add(realEstate); }
             if(cityPartId != null && realEstate.getCityPart().getId() != Integer.parseInt(cityPartId)){ filteredOut.add(realEstate); }

@@ -74,6 +74,7 @@
                       id="priceFrom"
                       name="priceFrom"
                       placeholder="Unesite cenu"
+                      (keypress)="numberOnly($event)"
                       #priceFrom="ngModel">
                   </div>
                 </div>
@@ -85,6 +86,7 @@
                       id="squareMetersFrom"
                       name="squareMetersFrom"
                       placeholder="Unesite kvadraturu"
+                      (keypress)="numberOnly($event)"
                       #squareMetersFrom="ngModel">
                   </div>
                 </div>
@@ -96,6 +98,7 @@
                       id="roomsFrom"
                       name="roomsFrom"
                       placeholder="Unesite broj soba"
+                      (keypress)="numberOnly($event)"
                       #roomsFrom="ngModel">
                   </div>
                 </div>
@@ -109,6 +112,7 @@
                       id="priceTo"
                       name="priceTo"
                       placeholder="Unesite cenu"
+                      (keypress)="numberOnly($event)"
                       #priceTo="ngModel">
                   </div>
                 </div>
@@ -120,6 +124,7 @@
                       id="squareMetersTo"
                       name="squareMetersTo"
                       placeholder="Unesite kvadraturu"
+                      (keypress)="numberOnly($event)"
                       #squareMetersTo="ngModel">
                   </div>
                 </div>
@@ -131,6 +136,7 @@
                       id="roomsTo"
                       name="roomsTo"
                       placeholder="Unesite broj soba"
+                      (keypress)="numberOnly($event)"
                       #roomsTo="ngModel">
                   </div>
                 </div>
