@@ -137,8 +137,10 @@
               </div>
               <button type="submit" [disabled]="!realEstateFilterForm.form.valid"class="btn btn-info">Trazi</button>
               <button type="submit" class="btn btn-info" (click)="showFilters()" [hidden]="hideFilters" style="float: right;">Sakrij Filtere</button>
+              <button type="button" class="btn btn-info" (click)="resetFilters()" [hidden]="hideFilters" style="float: right; margin-right: 15px;">Resetuj Filtere</button>
           </form>
           <button type="submit" class="btn btn-info" (click)="showFilters()" [hidden]="!hideFilters" style="float: right;">Prikazi Filtere</button>
+          <button type="submit" class="btn btn-info" (click)="resetFilters()" [hidden]="!hideFilters" style="float: right; margin-right: 15px;">Resetuj Filtere</button>
         </div>
       </div>
     </div>
