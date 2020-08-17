@@ -1,8 +1,6 @@
 package com.fon.bg.ac.dipl.controller;
 
-import com.fon.bg.ac.dipl.domain.ERole;
-import com.fon.bg.ac.dipl.domain.Role;
-import com.fon.bg.ac.dipl.domain.User;
+import com.fon.bg.ac.dipl.domain.*;
 import com.fon.bg.ac.dipl.payload.request.LoginRequest;
 import com.fon.bg.ac.dipl.payload.request.SignupRequest;
 import com.fon.bg.ac.dipl.payload.response.JwtResponse;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -62,7 +61,8 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(jwt,
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
-												 userDetails.getEmail(), 
+												 userDetails.getEmail(),
+												 userDetails.getPhoneNumber(),
 												 roles));
 	}
 
@@ -83,6 +83,7 @@ public class AuthController {
 		// Create new user's account
 		User user = new User(signUpRequest.getUsername(),
 							 signUpRequest.getEmail(),
+							 signUpRequest.getPhoneNumber(),
 							 encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();
@@ -126,5 +127,29 @@ public class AuthController {
 		userService.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+
+	@DeleteMapping(path="/delete")
+	public @ResponseBody boolean deleteUser(
+			@RequestParam(value = "id") String userId) {
+		User u = userService.findById(Integer.parseInt(userId));
+		return userService.deleteUser(u) != null;
+	}
+
+	@PostMapping(path="/update")
+	public @ResponseBody User updateUser (
+			@RequestBody Map<String, Object> requestBody) {
+		System.out.println(requestBody);
+		int id = Integer.parseInt(requestBody.get("id").toString());
+		User user = userService.findById(id);
+		String username = (String) requestBody.get("username");
+		String email = (String) requestBody.get("email");
+		String phoneNumber = (String) requestBody.get("phoneNumber");
+		user.setUsername(username);
+		user.setEmail(email);
+		user.setPhoneNumber(phoneNumber);
+		User updatedUser = userService.save(user);
+		System.out.println(updatedUser.getId() + " = updated");
+		return updatedUser;
 	}
 }

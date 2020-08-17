@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,8 +74,9 @@ public class MainController {
         String additionalInfo = (String) requestBody.get("additionalInfo");
         Map<String, Object> userJson = (Map<String, Object>) requestBody.get("user");
         User user = userService.findById((int) userJson.get("id"));
+        Date date = new Date(new java.util.Date().getTime());
 
-        RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
+        RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user, date);
         RealEstate saved = realEstateService.saveRealEstate(re);
         System.out.println(saved.getId() + " = saved");
         return saved;
@@ -180,12 +182,12 @@ public class MainController {
         List<RealEstate> filteredOut = new ArrayList<>();
 
         for (RealEstate realEstate : realEstates) {
-            if(priceFrom != null && realEstate.getPrice() < Double.parseDouble(priceFrom)){ filteredOut.add(realEstate); }
-            if(priceTo != null && realEstate.getPrice() > Double.parseDouble(priceTo)){ filteredOut.add(realEstate); }
-            if(squareMetersFrom != null && realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){ filteredOut.add(realEstate); }
-            if(squareMetersTo != null && realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){ filteredOut.add(realEstate); }
-            if(roomsFrom != null && realEstate.getRooms() < Double.parseDouble(roomsFrom)){ filteredOut.add(realEstate); }
-            if(roomsTo != null && realEstate.getRooms() > Double.parseDouble(roomsTo)){ filteredOut.add(realEstate); }
+            if(priceFrom != null && !priceFrom.isEmpty() && realEstate.getPrice() < Double.parseDouble(priceFrom)){ filteredOut.add(realEstate); }
+            if(priceTo != null && !priceTo.isEmpty() && realEstate.getPrice() > Double.parseDouble(priceTo)){ filteredOut.add(realEstate); }
+            if(squareMetersFrom != null && !squareMetersFrom.isEmpty() && realEstate.getSquareMeters() < Double.parseDouble(squareMetersFrom)){ filteredOut.add(realEstate); }
+            if(squareMetersTo != null && !squareMetersTo.isEmpty() && realEstate.getSquareMeters() > Double.parseDouble(squareMetersTo)){ filteredOut.add(realEstate); }
+            if(roomsFrom != null && !roomsFrom.isEmpty() && realEstate.getRooms() < Double.parseDouble(roomsFrom)){ filteredOut.add(realEstate); }
+            if(roomsTo != null && !roomsTo.isEmpty() && realEstate.getRooms() > Double.parseDouble(roomsTo)){ filteredOut.add(realEstate); }
             if(type != null && !(realEstate.getType().equals(type))){ filteredOut.add(realEstate); }
             if(service != null && !(realEstate.getService().equals(service))){ filteredOut.add(realEstate); }
             if(cityPartId != null && realEstate.getCityPart().getId() != Integer.parseInt(cityPartId)){ filteredOut.add(realEstate); }

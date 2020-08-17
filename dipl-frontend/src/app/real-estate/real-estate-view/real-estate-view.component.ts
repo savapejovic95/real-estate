@@ -19,6 +19,7 @@ export class RealEstateViewComponent implements OnInit {
   isLast = false;
   currentImageUrl: string;
   currImageIndex = 0;
+  showPhoneNumber = false;
 
   constructor(private realEstateService: RealEstateService, private route: ActivatedRoute) { }
 
@@ -73,6 +74,10 @@ export class RealEstateViewComponent implements OnInit {
     if(this.currImageIndex == this.realEstate.images.length-1){
       this.isLast = true;
     }
+  }
+
+  onShowNumber() {
+    this.showPhoneNumber = true;
   }
 
 }

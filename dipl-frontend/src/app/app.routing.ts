@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RealEstateComponent } from './real-estate/real-estate.component';
 import { RealEstateEditComponent } from './real-estate/real-estate-edit/real-estate-edit.component';
+import { EditProfileComponent } from './user/profile/edit-profile/edit-profile.component';
  
 const routes: Routes = [
   { path: '', component: RealEstateComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'my-listings/:userId', component: RealEstateListComponent },
-  { path: 'edit-real-estate/:realEstateId', component: RealEstateEditComponent}
+  { path: 'edit-real-estate/:realEstateId', component: RealEstateEditComponent},
+  { path: 'edit-profile', component: EditProfileComponent}
 ];
  
 @NgModule({

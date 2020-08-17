@@ -1,6 +1,7 @@
 package com.fon.bg.ac.dipl.domain;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "real_estate")
@@ -23,11 +24,12 @@ public class RealEstate {
     private String additionalInfo;
     @ManyToOne
     private User user;
+    private Date dateAdded;
 
     public RealEstate() {
     }
 
-    public RealEstate(String name, double price, double squareMeters, double rooms, String type, String service, CityPart cityPart, String address, String heating, String floor, String description, String additionalInfo, User user) {
+    public RealEstate(String name, double price, double squareMeters, double rooms, String type, String service, CityPart cityPart, String address, String heating, String floor, String description, String additionalInfo, User user, Date dateAdded) {
         this.name = name;
         this.price = price;
         this.squareMeters = squareMeters;
@@ -41,6 +43,7 @@ public class RealEstate {
         this.description = description;
         this.additionalInfo = additionalInfo;
         this.user = user;
+        this.dateAdded = dateAdded;
     }
 
     public Integer getId() {
@@ -153,5 +156,13 @@ public class RealEstate {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }

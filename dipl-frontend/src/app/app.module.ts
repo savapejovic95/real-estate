@@ -29,6 +29,8 @@ import { RealEstateComponent } from './real-estate/real-estate.component';
 import { RealEstateEditComponent } from './real-estate/real-estate-edit/real-estate-edit.component';
 import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteUserDialogComponent } from './dialog/delete-user-dialog/delete-user-dialog.component';
+import { EditProfileComponent } from './user/profile/edit-profile/edit-profile.component';
  
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ProfileComponent,
     RealEstateComponent,
     RealEstateEditComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    DeleteUserDialogComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

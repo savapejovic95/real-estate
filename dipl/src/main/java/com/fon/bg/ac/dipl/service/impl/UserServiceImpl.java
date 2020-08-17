@@ -15,8 +15,8 @@ public class UserServiceImpl implements IUserService {
     UserRepository userRepository;
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -66,5 +66,11 @@ public class UserServiceImpl implements IUserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public User deleteUser(User user) {
+        userRepository.delete(user);
+        return user;
     }
 }

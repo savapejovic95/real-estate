@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    void save(User user);
+    User save(User user);
 
     List<User> returnAllUsers();
 
@@ -17,4 +17,6 @@ public interface IUserService {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+
+    User deleteUser(User user);
 }

@@ -84,4 +84,18 @@ export class FilterComponent implements OnInit {
       }
     });
   }
+
+  resetFilters() {
+    this.realEstateService.findAllRealEstates().subscribe(data => {
+      this.filteredRealEstates = data;
+      this.populateImages();
+      this.filteredRealEstatesEvent.emit(this.filteredRealEstates);
+    });
+    this.filter = new Filter();
+  }
+
+  numberOnly(event): boolean {
+    var rgx = /^[0-9]*\.?[0-9]*$/;
+    return event.key.match(rgx) != null;
+  }
 }
