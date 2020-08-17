@@ -40,4 +40,15 @@ export class AuthService {
            })
       });
   }
+
+  updateUser(user: User) {
+    return this.http.post<User>(
+      AUTH_API + 'update', user,
+      {
+        headers: new HttpHeaders({
+             'Content-Type':  'application/json',
+           })
+      }
+    )
+  }
 }
