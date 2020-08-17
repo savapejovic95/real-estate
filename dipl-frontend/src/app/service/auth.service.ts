@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../model/user';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
 
@@ -29,5 +30,14 @@ export class AuthService {
       phoneNumber: user.phoneNumber,
       password: user.password
     }, httpOptions);
+  }
+
+  delete(userId: string) {
+    return this.http.delete<User>(
+      AUTH_API + 'delete?id=' + userId,{
+        headers: new HttpHeaders({
+             'Content-Type':  'application/json',
+           })
+      });
   }
 }

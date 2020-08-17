@@ -1,8 +1,6 @@
 package com.fon.bg.ac.dipl.controller;
 
-import com.fon.bg.ac.dipl.domain.ERole;
-import com.fon.bg.ac.dipl.domain.Role;
-import com.fon.bg.ac.dipl.domain.User;
+import com.fon.bg.ac.dipl.domain.*;
 import com.fon.bg.ac.dipl.payload.request.LoginRequest;
 import com.fon.bg.ac.dipl.payload.request.SignupRequest;
 import com.fon.bg.ac.dipl.payload.response.JwtResponse;
@@ -128,5 +126,12 @@ public class AuthController {
 		userService.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+
+	@DeleteMapping(path="/delete")
+	public @ResponseBody boolean deleteUser(
+			@RequestParam(value = "id") String userId) {
+		User u = userService.findById(Integer.parseInt(userId));
+		return userService.deleteUser(u) != null;
 	}
 }

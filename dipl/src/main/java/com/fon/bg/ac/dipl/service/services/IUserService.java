@@ -17,4 +17,6 @@ public interface IUserService {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+
+    User deleteUser(User user);
 }

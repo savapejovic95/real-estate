@@ -18,6 +18,8 @@
         {{ role }}
       </li>
     </ul> -->
+    <button class="btn btn-info" style="margin-right: 15px;" (click)="deleteAccount()">Obrisi nalog</button>
+    <button class="btn btn-info" (click)="editProfile()">Izmeni profil</button>
   </div>
 
   <div class="container" *ngIf="!currentUser">

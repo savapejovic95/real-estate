@@ -67,4 +67,10 @@ public class UserServiceImpl implements IUserService {
         }
         return false;
     }
+
+    @Override
+    public User deleteUser(User user) {
+        userRepository.delete(user);
+        return user;
+    }
 }
