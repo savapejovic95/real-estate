@@ -5,11 +5,6 @@
       </h3>
     </header>
     <p>
-      <strong>Token:</strong>
-      {{ currentUser.accessToken.substring(0, 20) }} ...
-      {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
-    </p>
-    <p>
       <strong>Email:</strong>
       {{ currentUser.email }}
     </p>
@@ -17,12 +12,12 @@
       <strong>Broj telefona:</strong>
       {{ currentUser.phoneNumber }}
     </p>
-    <strong>Vrsta naloga:</strong>
+    <!-- <strong>Vrsta naloga:</strong>
     <ul>
       <li *ngFor="let role of currentUser.roles">
         {{ role }}
       </li>
-    </ul>
+    </ul> -->
   </div>
 
   <div class="container" *ngIf="!currentUser">

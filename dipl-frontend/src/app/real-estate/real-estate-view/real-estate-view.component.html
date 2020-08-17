@@ -14,9 +14,10 @@
                       </div>
                       <br>
                       <div class="row">
-                        <div class="col-md-9"><h6>Lokacija: {{ realEstate.cityPart.city.name }} > {{ realEstate.cityPart.name }} > {{ realEstate.address }}</h6></div>
+                        <div class="col-md-5"><h6>Lokacija:</h6><p>{{ realEstate.cityPart.city.name }} > {{ realEstate.cityPart.name }} > {{ realEstate.address }}</p></div>
+                        <div class="col-md-2"><h6>Objavio/la:</h6><p>{{ realEstate.user.username }}</p></div>
+                        <div class="col-md-2"><h6>Datum objave:</h6><p>{{ realEstate.dateAdded }}</p></div>
                         <div class="col-md-3">
-                          <h6>Objavio/la: {{ realEstate.user.username }}</h6>
                           <span *ngIf="!showPhoneNumber" (click)="onShowNumber()">Klikni da vidis broj telefona</span>
                           <span *ngIf="showPhoneNumber">{{ realEstate.user.phoneNumber }}</span>
                         </div>

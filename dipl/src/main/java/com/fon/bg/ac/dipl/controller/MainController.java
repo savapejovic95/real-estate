@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,8 +74,9 @@ public class MainController {
         String additionalInfo = (String) requestBody.get("additionalInfo");
         Map<String, Object> userJson = (Map<String, Object>) requestBody.get("user");
         User user = userService.findById((int) userJson.get("id"));
+        Date date = new Date(new java.util.Date().getTime());
 
-        RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user);
+        RealEstate re = new RealEstate(name, price, squareMeters, rooms, type, service, cityPart, address, heating, floor, description, additionalInfo, user, date);
         RealEstate saved = realEstateService.saveRealEstate(re);
         System.out.println(saved.getId() + " = saved");
         return saved;
