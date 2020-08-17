@@ -4,6 +4,7 @@ import com.fon.bg.ac.dipl.domain.RealEstate;
 import com.fon.bg.ac.dipl.repository.RealEstateRepository;
 import com.fon.bg.ac.dipl.service.services.IRealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +19,21 @@ public class RealEstateServiceImpl implements IRealEstateService {
     @Override
     public List<RealEstate> returnAllRealEstates() {
         return realEstateRepository.findAll();
+    }
+
+    @Override
+    public List<RealEstate> returnAllRealEstatesSortByPrice() {
+        return realEstateRepository.findAll(Sort.by(Sort.Direction.ASC, "price"));
+    }
+
+    @Override
+    public List<RealEstate> returnAllRealEstatesSortBySquareMeters() {
+        return realEstateRepository.findAll(Sort.by(Sort.Direction.ASC, "squareMeters"));
+    }
+
+    @Override
+    public List<RealEstate> returnAllRealEstatesSortByDateAdded() {
+        return realEstateRepository.findAll(Sort.by(Sort.Direction.ASC, "dateAdded"));
     }
 
     @Override

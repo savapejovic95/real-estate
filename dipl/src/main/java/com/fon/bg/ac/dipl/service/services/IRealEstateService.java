@@ -8,6 +8,12 @@ public interface IRealEstateService {
 
     List<RealEstate> returnAllRealEstates();
 
+    List<RealEstate> returnAllRealEstatesSortByPrice();
+
+    List<RealEstate> returnAllRealEstatesSortBySquareMeters();
+
+    List<RealEstate> returnAllRealEstatesSortByDateAdded();
+
     RealEstate saveRealEstate(RealEstate realEstate);
 
     RealEstate returnRealEstateById(int id);

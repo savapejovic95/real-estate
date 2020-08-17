@@ -103,10 +103,20 @@ public class MainController {
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<RealEstate> getAllRealEstates(
-            @RequestParam(value = "userId", required = false) String userId
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam(value = "sort", required = false) String sort
     ) {
         if(userId == null) {
-            return realEstateService.returnAllRealEstates();
+            if(sort == null) {
+                return realEstateService.returnAllRealEstates();
+            } else {
+                switch (sort){
+                    case "price": return realEstateService.returnAllRealEstatesSortByPrice();
+                    case "squareMeters": return realEstateService.returnAllRealEstatesSortBySquareMeters();
+                    case "dateAdded": return realEstateService.returnAllRealEstatesSortByDateAdded();
+                    default: return realEstateService.returnAllRealEstates();
+                }
+            }
         } else {
             return realEstateService.returnRealEstatesByUserId(userId);
         }
